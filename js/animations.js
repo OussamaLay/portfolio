@@ -5,6 +5,9 @@
    - IntersectionObserver pour reveals au scroll
    - Détection et respect de prefers-reduced-motion
    - Animations fluides sur les sections, cartes, badges
+   
+   FIX: Correction du MutationObserver qui empêchait les projets
+   de devenir visibles après un changement de langue/filtre
    ============================================================ */
 
 (function() {
@@ -22,6 +25,46 @@
     return;
   }
 
+  // Observer global pour éviter les duplications
+  let scrollObserver = null;
+  let projectsMutationObserver = null;
+
+
+  // ─────────────────────────────────────────────────────────
+  // INTERSECTION OBSERVER
+  // Détecte quand les éléments entrent dans le viewport
+  // ─────────────────────────────────────────────────────────
+  function createScrollObserver() {
+    // Déconnecte l'ancien observer s'il existe
+    if (scrollObserver) {
+      scrollObserver.disconnect();
+    }
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -100px 0px', // Trigger un peu avant que l'élément soit visible
+      threshold: 0.15 // 15% de l'élément visible
+    };
+
+    scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Ajoute la classe visible
+          entry.target.classList.add('reveal--visible');
+          
+          // Optionnel : ne plus observer après la première apparition
+          // scrollObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe tous les éléments avec la classe 'reveal'
+    const elementsToReveal = document.querySelectorAll('.reveal');
+    elementsToReveal.forEach(el => scrollObserver.observe(el));
+
+    return scrollObserver;
+  }
+
 
   // ─────────────────────────────────────────────────────────
   // AJOUT DES CLASSES REVEAL SUR LES ÉLÉMENTS À ANIMER
@@ -37,16 +80,24 @@
     // On observe le conteneur et on ajoute les classes aux cartes une fois générées
     const projectsContainer = document.getElementById('projects-container');
     if (projectsContainer) {
+      // Déconnecte l'ancien observer s'il existe
+      if (projectsMutationObserver) {
+        projectsMutationObserver.disconnect();
+      }
+
       // Observer pour détecter quand les cartes sont ajoutées
-      const observer = new MutationObserver(() => {
+      projectsMutationObserver = new MutationObserver(() => {
         const cards = projectsContainer.querySelectorAll('.project-card');
         cards.forEach((card, index) => {
           card.classList.add('reveal');
           // Décalage de l'animation pour un effet en cascade
           card.style.transitionDelay = `${index * 0.1}s`;
         });
+
+        // IMPORTANT : Re-créer le scroll observer pour observer les nouvelles cartes
+        createScrollObserver();
       });
-      observer.observe(projectsContainer, { childList: true });
+      projectsMutationObserver.observe(projectsContainer, { childList: true });
     }
 
     // Timeline items
@@ -61,37 +112,6 @@
     skillsBadges.forEach((badge, index) => {
       badge.style.transitionDelay = `${Math.floor(index / 8) * 0.05}s`;
     });
-  }
-
-
-  // ─────────────────────────────────────────────────────────
-  // INTERSECTION OBSERVER
-  // Détecte quand les éléments entrent dans le viewport
-  // ─────────────────────────────────────────────────────────
-  function createScrollObserver() {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px 0px -100px 0px', // Trigger un peu avant que l'élément soit visible
-      threshold: 0.15 // 15% de l'élément visible
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Ajoute la classe visible
-          entry.target.classList.add('reveal--visible');
-          
-          // Optionnel : ne plus observer après la première apparition
-          // observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    // Observe tous les éléments avec la classe 'reveal'
-    const elementsToReveal = document.querySelectorAll('.reveal');
-    elementsToReveal.forEach(el => observer.observe(el));
-
-    return observer;
   }
 
 
@@ -187,13 +207,8 @@
     init();
   }
 
-  // Re-setup après génération dynamique des projets
-  // (nécessaire car projects.js génère les cartes après le chargement)
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      setupRevealElements();
-      createScrollObserver();
-    }, 500);
-  });
+  // Re-setup après génération dynamique des projets - SUPPRIMÉ
+  // Cette partie causait des problèmes en créant plusieurs observers
+  // Le MutationObserver gère maintenant les nouvelles cartes automatiquement
 
 })();
