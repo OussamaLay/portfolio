@@ -74,8 +74,40 @@ window.i18nData = {
       filter: {
         all: "Tous"
       },
-      // Les projets individuels seront ajoutés à l'étape 8
-      items: []
+      items: [
+        {
+          id: "mes-data-foundation",
+          title: "Data Foundation MES — Sanofi",
+          description: "Sécurisation d'une Data Foundation MES via des contrôles Data Quality sur Snowflake, orchestrés avec dbt et Airflow. Réduction de 23% des anomalies et amélioration de la confiance dans les données publiées.",
+          tags: ["Snowflake", "dbt", "Airflow", "SQL", "Streamlit"],
+          featured: true,
+          showIn: ["fr", "en"]
+        },
+        {
+          id: "ai-agent-cortex",
+          title: "Agent IA d'accès aux données",
+          description: "Conception d'un agent conversationnel en langage naturel pour interroger les données SAP via Snowflake Cortex. Interface Streamlit, modèle sémantique dbt, recherche documentaire intégrée.",
+          tags: ["Snowflake", "Cortex", "NLP", "dbt", "Streamlit"],
+          featured: true,
+          showIn: ["fr", "en"]
+        },
+        {
+          id: "jo-2024-pipeline",
+          title: "Pipeline ETL JO Paris 2024",
+          description: "Construction d'un pipeline ETL pour centraliser les données de maintenance du Village des Athlètes. Modélisation en schéma en étoile, transformations PySpark, dashboards Power BI pour le pilotage opérationnel.",
+          tags: ["PySpark", "PostgreSQL", "Power BI", "ETL"],
+          featured: false,
+          showIn: ["fr", "en"]
+        },
+        {
+          id: "f1-lakehouse",
+          title: "Data Lakehouse Formule 1",
+          description: "Plateforme cloud end-to-end pour l'analyse de données F1 : ingestion Azure Data Factory, transformation Databricks (PySpark), stockage Delta Lake, visualisation Power BI. Architecture moderne Data Lakehouse.",
+          tags: ["Azure", "Databricks", "Delta Lake", "PySpark", "Power BI"],
+          featured: false,
+          showIn: ["fr", "en"]
+        }
+      ]
     },
 
     // Contact
@@ -155,8 +187,40 @@ window.i18nData = {
       filter: {
         all: "All"
       },
-      // Individual projects will be added in step 8
-      items: []
+      items: [
+        {
+          id: "mes-data-foundation",
+          title: "MES Data Foundation — Sanofi",
+          description: "Secured an MES Data Foundation through Data Quality controls on Snowflake, orchestrated with dbt and Airflow. Reduced anomalies by 23% and improved confidence in published data.",
+          tags: ["Snowflake", "dbt", "Airflow", "SQL", "Streamlit"],
+          featured: true,
+          showIn: ["fr", "en"]
+        },
+        {
+          id: "ai-agent-cortex",
+          title: "AI-powered Data Access Agent",
+          description: "Built a conversational agent for querying SAP data in natural language using Snowflake Cortex. Streamlit UI, dbt semantic model, integrated document search.",
+          tags: ["Snowflake", "Cortex", "NLP", "dbt", "Streamlit"],
+          featured: true,
+          showIn: ["fr", "en"]
+        },
+        {
+          id: "jo-2024-pipeline",
+          title: "ETL Pipeline — Paris 2024 Olympics",
+          description: "Built an ETL pipeline to centralize maintenance data for the Athletes' Village. Star schema modeling, PySpark transformations, Power BI dashboards for operational monitoring.",
+          tags: ["PySpark", "PostgreSQL", "Power BI", "ETL"],
+          featured: false,
+          showIn: ["fr", "en"]
+        },
+        {
+          id: "f1-lakehouse",
+          title: "Formula 1 Data Lakehouse",
+          description: "End-to-end cloud platform for F1 data analysis: Azure Data Factory ingestion, Databricks (PySpark) transformations, Delta Lake storage, Power BI visualization. Modern Data Lakehouse architecture.",
+          tags: ["Azure", "Databricks", "Delta Lake", "PySpark", "Power BI"],
+          featured: false,
+          showIn: ["fr", "en"]
+        }
+      ]
     },
 
     // Contact

@@ -226,7 +226,12 @@
     // 6. Persistance en localStorage
     localStorage.setItem(STORAGE_KEY, lang);
 
-    // 7. Log pour debug (à retirer en prod)
+    // 7. Mise à jour des projets (si le module existe)
+    if (window.projects && typeof window.projects.render === 'function') {
+      window.projects.render(lang);
+    }
+
+    // 8. Log pour debug (à retirer en prod)
     console.log(`[i18n] Langue changée : ${lang}`);
   }
 
