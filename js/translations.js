@@ -33,6 +33,8 @@ window.i18nData = {
     // Navigation
     nav: {
       about: "À propos",
+      education: "Formation",
+      experience: "Expérience",
       skills: "Compétences",
       projects: "Projets",
       contact: "Contact"
@@ -48,13 +50,81 @@ window.i18nData = {
     // About
     about: {
       title: "À propos de moi",
-      description: "Diplômé ingénieur en systèmes d'information, je me spécialise en Data Engineering avec un focus sur la qualité des données, l'industrialisation des pipelines ELT et les environnements Cloud (Snowflake, Azure, Databricks). J'ai contribué à des projets concrets en stage : la Data Foundation MES chez Sanofi (via Atos) et un pipeline de maintenance pour les JO Paris 2024 (Spie Batignolles).",
+      description: "Diplômé ingénieur en systèmes d'information, je me spécialise en Data Engineering avec un focus sur la qualité des données, l'industrialisation des pipelines ELT et les environnements Cloud (Snowflake, Azure, Databricks).",
       tag: {
         pipelines: "Pipelines ELT",
         quality: "Data Quality",
         cloud: "Cloud & Scale",
         agile: "Agile / Scrum"
       }
+    },
+
+    // Education (Parcours académique)
+    education: {
+      title: "Parcours académique",
+      items: [
+        {
+          id: "isima",
+          dates: "Sept 2022 - Sept 2025",
+          school: "Clermont Auvergne INP ISIMA",
+          degree: "Ingénieur en Systèmes d'Information et Aide à la Décision",
+          location: "Clermont-Ferrand, France",
+          description: "Formation d'ingénieur spécialisée en data engineering, big data, et aide à la décision."
+        },
+        {
+          id: "oth",
+          dates: "Juin 2023 - Juil 2023",
+          school: "Ostbayerische Technische Hochschule (OTH)",
+          degree: "Informatique & Mathématiques Appliquées",
+          location: "Regensburg, Allemagne",
+          description: "Programme d'échange international axé sur l'informatique et les mathématiques appliquées."
+        },
+        {
+          id: "prepa",
+          dates: "Sept 2020 - Juin 2022",
+          school: "Lycée Moulay Youssef",
+          degree: "Classes Préparatoires aux Grandes Écoles - PSI",
+          location: "Rabat, Maroc",
+          description: "Physique et Sciences de l'Ingénieur (PSI), préparation aux concours des écoles d'ingénieurs."
+        }
+      ]
+    },
+
+    // Professional Experience (Parcours professionnel)
+    experience: {
+      title: "Parcours professionnel",
+      items: [
+        {
+          id: "atos-sanofi",
+          dates: "Avr 2025 - Sept 2025",
+          role: "Stage - Data Engineer",
+          company: "Atos (mission Sanofi)",
+          location: "Bordeaux, France",
+          description: "Sécurisation de la Data Foundation MES via contrôles Data Quality sur Snowflake (réduction de 23% des anomalies). Industrialisation dbt + Airflow. Conception d'un agent IA d'accès aux données avec Snowflake Cortex.",
+          tags: ["Stage"],
+          type: "internship"
+        },
+        {
+          id: "spie-jo2024",
+          dates: "Mai 2024 - Sept 2024",
+          role: "Stage - Data Analyst",
+          company: "Spie Batignolles Énergie",
+          location: "Eaubonne, Île-de-France",
+          description: "Mise en place d'un pipeline ETL pour centraliser les données de maintenance du Village des Athlètes (JO Paris 2024). Modélisation en schéma en étoile, transformations PySpark, dashboards Power BI.",
+          tags: ["Stage"],
+          type: "internship"
+        },
+        {
+          id: "hackathon-sopra",
+          dates: "Oct 2023",
+          role: "Hackathon - Dashboard RSE",
+          company: "Sopra Steria",
+          location: "France",
+          description: "Conception d'une application web comparant la performance énergétique avec des prédictions de consommation dans le cadre d'un hackathon RSE.",
+          tags: ["Hackathon", "Projet collaboratif"],
+          type: "hackathon"
+        }
+      ]
     },
 
     // Skills
@@ -68,7 +138,7 @@ window.i18nData = {
       }
     },
 
-    // Projects
+    // Projects (uniquement projets techniques/académiques)
     projects: {
       title: "Projets",
       filter: {
@@ -76,27 +146,11 @@ window.i18nData = {
       },
       items: [
         {
-          id: "mes-data-foundation",
-          title: "Data Foundation MES — Sanofi",
-          description: "Sécurisation d'une Data Foundation MES via des contrôles Data Quality sur Snowflake, orchestrés avec dbt et Airflow. Réduction de 23% des anomalies et amélioration de la confiance dans les données publiées.",
-          tags: ["Snowflake", "dbt", "Airflow", "SQL", "Streamlit"],
+          id: "media-spend-platform",
+          title: "Plateforme Data Media Spend",
+          description: "Plateforme Data end-to-end avec Informatica IICS et Snowflake pour l'ingestion, la transformation et la modélisation de données Media Spend. Dashboards Snowflake et applications Streamlit.",
+          tags: ["Informatica IICS", "Snowflake", "Streamlit", "ETL"],
           featured: true,
-          showIn: ["fr", "en"]
-        },
-        {
-          id: "ai-agent-cortex",
-          title: "Agent IA d'accès aux données",
-          description: "Conception d'un agent conversationnel en langage naturel pour interroger les données SAP via Snowflake Cortex. Interface Streamlit, modèle sémantique dbt, recherche documentaire intégrée.",
-          tags: ["Snowflake", "Cortex", "NLP", "dbt", "Streamlit"],
-          featured: true,
-          showIn: ["fr", "en"]
-        },
-        {
-          id: "jo-2024-pipeline",
-          title: "Pipeline ETL JO Paris 2024",
-          description: "Construction d'un pipeline ETL pour centraliser les données de maintenance du Village des Athlètes. Modélisation en schéma en étoile, transformations PySpark, dashboards Power BI pour le pilotage opérationnel.",
-          tags: ["PySpark", "PostgreSQL", "Power BI", "ETL"],
-          featured: false,
           showIn: ["fr", "en"]
         },
         {
@@ -104,7 +158,7 @@ window.i18nData = {
           title: "Data Lakehouse Formule 1",
           description: "Plateforme cloud end-to-end pour l'analyse de données F1 : ingestion Azure Data Factory, transformation Databricks (PySpark), stockage Delta Lake, visualisation Power BI. Architecture moderne Data Lakehouse.",
           tags: ["Azure", "Databricks", "Delta Lake", "PySpark", "Power BI"],
-          featured: false,
+          featured: true,
           showIn: ["fr", "en"]
         }
       ]
@@ -146,6 +200,8 @@ window.i18nData = {
     // Navigation
     nav: {
       about: "About",
+      education: "Education",
+      experience: "Experience",
       skills: "Skills",
       projects: "Projects",
       contact: "Contact"
@@ -161,13 +217,81 @@ window.i18nData = {
     // About
     about: {
       title: "About me",
-      description: "Graduate engineer in information systems, I specialize in Data Engineering with a focus on data quality, ELT pipeline industrialization, and Cloud environments (Snowflake, Azure, Databricks). I've contributed to real-world projects during internships: the MES Data Foundation at Sanofi (via Atos) and a maintenance pipeline for the Paris 2024 Olympics (Spie Batignolles).",
+      description: "Graduate engineer in information systems, I specialize in Data Engineering with a focus on data quality, ELT pipeline industrialization, and Cloud environments (Snowflake, Azure, Databricks).",
       tag: {
         pipelines: "ELT Pipelines",
         quality: "Data Quality",
         cloud: "Cloud & Scale",
         agile: "Agile / Scrum"
       }
+    },
+
+    // Education
+    education: {
+      title: "Education",
+      items: [
+        {
+          id: "isima",
+          dates: "Sept 2022 - Sept 2025",
+          school: "Clermont Auvergne INP ISIMA",
+          degree: "Engineer in Information Systems and Decision Support",
+          location: "Clermont-Ferrand, France",
+          description: "Engineering program specialized in data engineering, big data, and decision support systems."
+        },
+        {
+          id: "oth",
+          dates: "June 2023 - July 2023",
+          school: "Ostbayerische Technische Hochschule (OTH)",
+          degree: "Computer Science & Applied Mathematics",
+          location: "Regensburg, Germany",
+          description: "International exchange program focused on computer science and applied mathematics."
+        },
+        {
+          id: "prepa",
+          dates: "Sept 2020 - June 2022",
+          school: "Lycée Moulay Youssef",
+          degree: "Preparatory Classes for Engineering Schools - PSI",
+          location: "Rabat, Morocco",
+          description: "Physics and Engineering Sciences (PSI), preparation for competitive engineering school entrance exams."
+        }
+      ]
+    },
+
+    // Professional Experience
+    experience: {
+      title: "Professional Experience",
+      items: [
+        {
+          id: "atos-sanofi",
+          dates: "Apr 2025 - Sept 2025",
+          role: "Internship - Data Engineer",
+          company: "Atos (Sanofi project)",
+          location: "Bordeaux, France",
+          description: "Secured MES Data Foundation through Data Quality controls on Snowflake (reduced anomalies by 23%). Industrialization with dbt + Airflow. Built an AI-powered data access agent using Snowflake Cortex.",
+          tags: ["Internship"],
+          type: "internship"
+        },
+        {
+          id: "spie-jo2024",
+          dates: "May 2024 - Sept 2024",
+          role: "Internship - Data Analyst",
+          company: "Spie Batignolles Énergie",
+          location: "Eaubonne, Île-de-France",
+          description: "Built an ETL pipeline to centralize maintenance data for the Athletes' Village (Paris 2024 Olympics). Star schema modeling, PySpark transformations, Power BI dashboards.",
+          tags: ["Internship"],
+          type: "internship"
+        },
+        {
+          id: "hackathon-sopra",
+          dates: "Oct 2023",
+          role: "Hackathon - CSR Dashboard",
+          company: "Sopra Steria",
+          location: "France",
+          description: "Built a web application comparing energy performance with consumption predictions during a CSR-focused hackathon.",
+          tags: ["Hackathon", "Collaborative Project"],
+          type: "hackathon"
+        }
+      ]
     },
 
     // Skills
@@ -181,7 +305,7 @@ window.i18nData = {
       }
     },
 
-    // Projects
+    // Projects (technical/academic projects only)
     projects: {
       title: "Projects",
       filter: {
@@ -189,27 +313,11 @@ window.i18nData = {
       },
       items: [
         {
-          id: "mes-data-foundation",
-          title: "MES Data Foundation — Sanofi",
-          description: "Secured an MES Data Foundation through Data Quality controls on Snowflake, orchestrated with dbt and Airflow. Reduced anomalies by 23% and improved confidence in published data.",
-          tags: ["Snowflake", "dbt", "Airflow", "SQL", "Streamlit"],
+          id: "media-spend-platform",
+          title: "Media Spend Data Platform",
+          description: "End-to-end data platform with Informatica IICS and Snowflake for Media Spend data ingestion, transformation, and modeling. Snowflake dashboards and Streamlit applications.",
+          tags: ["Informatica IICS", "Snowflake", "Streamlit", "ETL"],
           featured: true,
-          showIn: ["fr", "en"]
-        },
-        {
-          id: "ai-agent-cortex",
-          title: "AI-powered Data Access Agent",
-          description: "Built a conversational agent for querying SAP data in natural language using Snowflake Cortex. Streamlit UI, dbt semantic model, integrated document search.",
-          tags: ["Snowflake", "Cortex", "NLP", "dbt", "Streamlit"],
-          featured: true,
-          showIn: ["fr", "en"]
-        },
-        {
-          id: "jo-2024-pipeline",
-          title: "ETL Pipeline — Paris 2024 Olympics",
-          description: "Built an ETL pipeline to centralize maintenance data for the Athletes' Village. Star schema modeling, PySpark transformations, Power BI dashboards for operational monitoring.",
-          tags: ["PySpark", "PostgreSQL", "Power BI", "ETL"],
-          featured: false,
           showIn: ["fr", "en"]
         },
         {
@@ -217,7 +325,7 @@ window.i18nData = {
           title: "Formula 1 Data Lakehouse",
           description: "End-to-end cloud platform for F1 data analysis: Azure Data Factory ingestion, Databricks (PySpark) transformations, Delta Lake storage, Power BI visualization. Modern Data Lakehouse architecture.",
           tags: ["Azure", "Databricks", "Delta Lake", "PySpark", "Power BI"],
-          featured: false,
+          featured: true,
           showIn: ["fr", "en"]
         }
       ]
