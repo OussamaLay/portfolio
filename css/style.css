@@ -1,0 +1,1009 @@
+/* ============================================================
+   PORTFOLIO — Oussama Layaidi | Data Engineer
+   style.css — Fondation CSS complète
+   ============================================================
+   Organisation :
+   1. @import — Polices Google Fonts
+   2. Variables CSS (:root) — thème sombre "tech/data"
+   3. Reset minimal
+   4. Base typographique
+   5. Layout utilitaires (.container, .section)
+   6. Fond "tech/data" — grille CSS subtile
+   7. Skip-link (accessibilité)
+   8. Navigation
+   9. Hero
+  10. About
+  11. Skills
+  12. Projects (shell)
+  13. Contact
+  14. Footer
+  15. Animations & reveals
+  16. Responsive (@media)
+  17. prefers-reduced-motion
+   ============================================================ */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. POLICES — via @import
+   Note perf : en production, switcher vers <link> dans le <head>
+   avec display=swap pour éviter le FOIT.
+   Polices choisies :
+   - Syne        → titres (géométrique, bold, distinctive)
+   - DM Sans     → corps (clean, lisible, moderne)
+   - JetBrains Mono → badges tech / code (monospace distinctif)
+   ───────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+
+/* ─────────────────────────────────────────────────────────────
+   2. VARIABLES CSS — thème sombre "tech/data"
+   Toutes les valeurs répétées sont centralisées ici.
+   Pour changer le thème, modifier ces variables suffice.
+   ───────────────────────────────────────────────────────────── */
+:root {
+
+  /* — Couleurs de fond — */
+  --color-bg-primary:    #0a0e1a;   /* fond principal, noir profond */
+  --color-bg-secondary:  #111827;   /* sections alternées */
+  --color-bg-card:       #151b2d;   /* cartes, badges */
+  --color-bg-card-hover: #1a2340;   /* cards au hover */
+
+  /* — Couleurs de texte — */
+  --color-text-primary:   #f1f5f9;  /* texte principal */
+  --color-text-secondary: #94a3b8;  /* texte secondaire, descriptions */
+  --color-text-muted:     #64748b;  /* texte très atténué */
+
+  /* — Accent — couleur signature du site — */
+  --color-accent:       #38bdf8;              /* cyan vif */
+  --color-accent-hover: #7dd3fc;              /* plus clair au hover */
+  --color-accent-dim:   rgba(56, 189, 248, 0.12); /* teinture subtile */
+  --color-accent-glow:  rgba(56, 189, 248, 0.3);  /* glow pour les effets */
+
+  /* — Bordures — */
+  --color-border:       #1e293b;
+  --color-border-hover: #334155;
+
+  /* — Typographie — */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* — Tailles de texte — */
+  --size-xs:  0.6875rem;   /* 11px */
+  --size-sm:  0.8125rem;   /* 13px */
+  --size-base: 1rem;       /* 16px */
+  --size-md:  1.125rem;    /* 18px */
+  --size-lg:  1.5rem;      /* 24px */
+  --size-xl:  2rem;        /* 32px */
+  --size-2xl: 2.75rem;     /* 44px */
+  --size-3xl: 3.75rem;     /* 60px */
+
+  /* — Espacement — */
+  --space-xs:  0.25rem;    /* 4px  */
+  --space-sm:  0.5rem;     /* 8px  */
+  --space-md:  1rem;       /* 16px */
+  --space-lg:  1.5rem;     /* 24px */
+  --space-xl:  2.5rem;     /* 40px */
+  --space-2xl: 4rem;       /* 64px */
+  --space-3xl: 6rem;       /* 96px */
+
+  /* — Transitions — */
+  --transition-fast: 0.2s ease;
+  --transition-med:  0.3s ease;
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* — Layout — */
+  --max-width:  1100px;
+  --nav-height: 70px;
+
+  /* — Rayons de coin — */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   3. RESET MINIMAL
+   On ne tue pas tout le style par défaut — on normalise.
+   ───────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--size-base);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* évite le scroll horizontal sur mobile */
+}
+
+img, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Supprime les styles par défaut des listes utilisées comme composants */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Lien de base */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--color-accent-hover);
+}
+
+/* Focus visible — navigation clavier */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Boutons — reset de base */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. BASE TYPOGRAPHIQUE
+   ───────────────────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+h1 { font-size: var(--size-3xl); }
+h2 { font-size: var(--size-2xl); }
+h3 { font-size: var(--size-lg);  font-weight: 600; }
+
+p {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 680px; /* largeur de lecture optimale */
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. LAYOUT UTILITAIRES
+   ───────────────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-xl);
+}
+
+/* Chaque section a un padding vertical uniforme */
+.section {
+  padding-block: var(--space-3xl);
+}
+
+/* Sections avec fond secondaire (alternance visuelle) */
+.section--alt {
+  background-color: var(--color-bg-secondary);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   6. FOND "TECH/DATA" — grille CSS subtile
+   Rendu 100% CSS, zéro impact perf (pas de canvas, pas de JS).
+   La grille est fixée en arrière-plan sur le body.
+   ───────────────────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none; /* ne bloque rien */
+
+  /* Grille avec des lignes très subtiles */
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+
+  /* Gradient radial au centre pour créer une "source de lumière" */
+  background-color: transparent;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+}
+
+/* Le contenu est au-dessus du fond */
+header, main, footer {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   7. SKIP-LINK — accessibilité clavier
+   Invisible par défaut, apparaît au focus.
+   ───────────────────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-md);
+  background: var(--color-accent);
+  color: var(--color-bg-primary);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: var(--size-sm);
+  z-index: 1000;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--space-sm);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   8. NAVIGATION
+   ───────────────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  height: var(--nav-height);
+  background: rgba(10, 14, 26, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 100;
+  transition: background var(--transition-med);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-xl);
+  gap: var(--space-lg);
+}
+
+/* Logo */
+.nav__logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav__logo-text {
+  font-family: var(--font-display);
+  font-size: var(--size-lg);
+  font-weight: 800;
+  color: var(--color-accent);
+  letter-spacing: -1px;
+  transition: opacity var(--transition-fast);
+}
+
+.nav__logo:hover .nav__logo-text {
+  opacity: 0.7;
+}
+
+/* Liens de navigation */
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.nav__link {
+  color: var(--color-text-secondary);
+  font-size: var(--size-sm);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+  padding-block: var(--space-sm);
+  transition: color var(--transition-fast);
+}
+
+/* Ligne sous-titrée — apparaît au hover / section active */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  transition: width var(--transition-med);
+}
+
+.nav__link:hover,
+.nav__link--active {
+  color: var(--color-text-primary);
+}
+
+.nav__link:hover::after,
+.nav__link--active::after {
+  width: 100%;
+}
+
+/* Switch de langue */
+.nav__lang-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.nav__lang-btn {
+  font-size: var(--size-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.nav__lang-btn:hover {
+  color: var(--color-text-secondary);
+}
+
+.nav__lang-btn--active {
+  color: var(--color-accent);
+  background: var(--color-accent-dim);
+}
+
+.nav__lang-separator {
+  color: var(--color-border-hover);
+  font-size: var(--size-xs);
+}
+
+/* Hamburger — caché en desktop, visible en mobile */
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: var(--space-sm);
+}
+
+.nav__hamburger-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text-primary);
+  border-radius: 1px;
+  transition: transform var(--transition-med), opacity var(--transition-fast);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   9. HERO
+   ───────────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--nav-height);
+  padding-inline: var(--space-xl);
+}
+
+.hero__content {
+  max-width: var(--max-width);
+  text-align: center;
+}
+
+.hero__greeting {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--size-md);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.hero__name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--size-3xl);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  letter-spacing: -2px;
+  line-height: 1.1;
+}
+
+.hero__role {
+  margin-top: var(--space-md);
+  font-size: var(--size-lg);
+  font-weight: 500;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  letter-spacing: 1px;
+}
+
+.hero__tagline {
+  margin-top: var(--space-lg);
+  font-size: var(--size-md);
+  color: var(--color-text-secondary);
+  max-width: 560px;
+  margin-inline: auto;
+  line-height: 1.7;
+}
+
+/* Boutons sociaux */
+.hero__actions {
+  margin-top: var(--space-xl);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.hero__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-size: var(--size-sm);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.hero__btn:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-dim);
+  color: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px var(--color-accent-glow);
+}
+
+.hero__btn:active {
+  transform: translateY(0);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   10. ABOUT
+   ───────────────────────────────────────────────────────────── */
+.about {
+  padding-block: var(--space-3xl);
+}
+
+.about__inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-xl);
+}
+
+.about__title {
+  margin-bottom: var(--space-lg);
+  position: relative;
+  display: inline-block;
+}
+
+/* Ligne d'accent sous le titre de section — motif réutilisable */
+.about__title::after {
+  content: '';
+  position: absolute;
+  bottom: -var(--space-sm);
+  left: 0;
+  width: 48px;
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+.about__text {
+  margin-bottom: var(--space-xl);
+  font-size: var(--size-base);
+  color: var(--color-text-secondary);
+}
+
+/* Tags / mots-clés */
+.about__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.about__tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--size-xs);
+  color: var(--color-accent);
+  letter-spacing: 0.5px;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.about__tag:hover {
+  background: var(--color-accent-dim);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   11. SKILLS
+   ───────────────────────────────────────────────────────────── */
+.skills {
+  padding-block: var(--space-3xl);
+  background: var(--color-bg-secondary);
+}
+
+.skills__inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-xl);
+}
+
+.skills__title {
+  margin-bottom: var(--space-xl);
+  position: relative;
+  display: inline-block;
+}
+
+.skills__title::after {
+  content: '';
+  position: absolute;
+  bottom: -var(--space-sm);
+  left: 0;
+  width: 48px;
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+/* Groupe de compétences */
+.skills__group {
+  margin-bottom: var(--space-xl);
+}
+
+.skills__group:last-child {
+  margin-bottom: 0;
+}
+
+.skills__group-title {
+  font-size: var(--size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+  font-family: var(--font-mono);
+}
+
+/* Grille de badges */
+.skills__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* Badge individuel */
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--size-xs);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.3px;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.skill-badge:hover {
+  background: var(--color-accent-dim);
+  border-color: var(--color-accent);
+  color: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 12px var(--color-accent-glow);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   12. PROJECTS (shell structurel — styles détaillés à l'étape 8)
+   ───────────────────────────────────────────────────────────── */
+.projects {
+  padding-block: var(--space-3xl);
+}
+
+.projects__inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-xl);
+}
+
+.projects__title {
+  margin-bottom: var(--space-xl);
+  position: relative;
+  display: inline-block;
+}
+
+.projects__title::after {
+  content: '';
+  position: absolute;
+  bottom: -var(--space-sm);
+  left: 0;
+  width: 48px;
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+/* Filtres */
+.projects__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.projects__filter {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: var(--size-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.projects__filter:hover {
+  color: var(--color-text-secondary);
+  border-color: var(--color-border-hover);
+}
+
+.projects__filter--active {
+  color: var(--color-accent);
+  background: var(--color-accent-dim);
+  border-color: var(--color-accent);
+}
+
+/* Grille des cartes */
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-lg);
+}
+
+/* Carte de projet — styles de base (détails à l'étape 8) */
+.project-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition:
+    border-color var(--transition-med),
+    transform var(--transition-med),
+    box-shadow var(--transition-med);
+}
+
+.project-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px var(--color-accent-glow);
+}
+
+.project-card__tag-featured {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--size-xs);
+  color: var(--color-accent);
+  background: var(--color-accent-dim);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-md);
+  letter-spacing: 0.5px;
+}
+
+.project-card__title {
+  font-size: var(--size-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.project-card__description {
+  font-size: var(--size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-md);
+  line-height: 1.6;
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.project-card__tag {
+  font-family: var(--font-mono);
+  font-size: var(--size-xs);
+  color: var(--color-text-muted);
+  background: var(--color-bg-secondary);
+  padding: 3px var(--space-sm);
+  border-radius: var(--radius-sm);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   13. CONTACT
+   ───────────────────────────────────────────────────────────── */
+.contact {
+  padding-block: var(--space-3xl);
+  background: var(--color-bg-secondary);
+}
+
+.contact__inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-xl);
+}
+
+.contact__title {
+  margin-bottom: var(--space-md);
+  position: relative;
+  display: inline-block;
+}
+
+.contact__title::after {
+  content: '';
+  position: absolute;
+  bottom: -var(--space-sm);
+  left: 0;
+  width: 48px;
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+.contact__text {
+  margin-bottom: var(--space-xl);
+  font-size: var(--size-md);
+}
+
+/* Liens de contact */
+.contact__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 480px;
+}
+
+.contact__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.contact__link:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-dim);
+  transform: translateX(4px);
+  color: var(--color-text-primary);
+}
+
+.contact__link-label {
+  font-family: var(--font-mono);
+  font-size: var(--size-xs);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact__link-value {
+  font-size: var(--size-sm);
+  color: var(--color-text-secondary);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   14. FOOTER
+   ───────────────────────────────────────────────────────────── */
+.footer {
+  padding-block: var(--space-xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer__copy {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-xl);
+  text-align: center;
+  font-size: var(--size-sm);
+  color: var(--color-text-muted);
+}
+
+.footer__separator {
+  margin-inline: var(--space-sm);
+  opacity: 0.4;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   15. ANIMATIONS & REVEALS
+   Classes utilisées par animations.js (étape 10).
+   Ici on définit juste les états initial/final.
+   ───────────────────────────────────────────────────────────── */
+
+/* Élément à révéler au scroll — état cachné par défaut */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--transition-slow),
+    transform var(--transition-slow);
+}
+
+/* État visible — ajouté par JS via IntersectionObserver */
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variante : slide depuis la gauche */
+.reveal--left {
+  transform: translateX(-32px);
+}
+
+.reveal--left.reveal--visible {
+  transform: translateX(0);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   16. RESPONSIVE
+   ───────────────────────────────────────────────────────────── */
+
+/* Tablet — max 900px */
+@media (max-width: 900px) {
+
+  :root {
+    --size-3xl: 2.75rem;
+    --size-2xl: 2rem;
+    --space-3xl: 4rem;
+  }
+
+  .nav__links,
+  .nav__lang-switch {
+    display: none; /* caché en mobile — géré par le hamburger (étape 13) */
+  }
+
+  .nav__hamburger {
+    display: flex;
+  }
+
+  .hero {
+    padding-top: calc(var(--nav-height) + var(--space-xl));
+  }
+
+  .hero__name {
+    font-size: var(--size-2xl);
+  }
+
+  .projects__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile — max 600px */
+@media (max-width: 600px) {
+
+  :root {
+    --size-3xl: 2.25rem;
+    --space-xl: 1.5rem;
+    --space-3xl: 3rem;
+  }
+
+  .container,
+  .about__inner,
+  .skills__inner,
+  .projects__inner,
+  .contact__inner {
+    padding-inline: var(--space-md);
+  }
+
+  .hero__name {
+    letter-spacing: -1px;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   17. PREFERS-REDUCED-MOTION
+   Désactive toutes les animations pour les utilisateurs
+   qui ont activé cette préférence système.
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Les reveals sont directement visibles — pas d'attente d'animation */
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
