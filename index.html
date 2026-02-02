@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!-- 
+  ============================================================
+  PORTFOLIO — Oussama Layaidi | Data Engineer
+  ============================================================
+  Décisions de conception :
+  - lang="fr" par défaut → mis à jour dynamiquement par i18n.js
+  - Tous les textes portent un attribut [data-i18n="clé"] 
+    pour être traduits par le moteur i18n (étape 4)
+  - Les textes statiques par défaut sont en FR (fallback)
+  - Liens externes → rel="noopener noreferrer" (sécurité)
+  - Skip-to-content pour accessibilité clavier
+  - Hiérarchie : h1 unique (nom), h2 (sections), h3 (sous-éléments)
+  ============================================================
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ─── TITRE + DESCRIPTION (mis à jour en JS par i18n.js à l'étape 4) ─── -->
+  <title>Oussama Layaidi — Data Engineer</title>
+  <meta name="description" 
+        content="Portfolio de Oussama Layaidi, Data Engineer junior spécialisé en pipelines de données, Snowflake, dbt et transformation digitale." />
+
+  <!-- ─── HREFLANG — indique aux moteurs les versions linguistiques ─── -->
+  <!-- ⚠️ Remplacer l'URL de base par votre domaine final avant déploiement -->
+  <link rel="alternate" hreflang="fr"      href="https://oussama-layaidi.vercel.app/?lang=fr" />
+  <link rel="alternate" hreflang="en"      href="https://oussama-layaidi.vercel.app/?lang=en" />
+  <link rel="alternate" hreflang="x-default" href="https://oussama-layaidi.vercel.app/" />
+
+  <!-- ─── OPEN GRAPH (mis à jour en JS par i18n.js à l'étape 4) ─── -->
+  <meta property="og:title"       content="Oussama Layaidi — Data Engineer" />
+  <meta property="og:description" content="Portfolio de Oussama Layaidi, Data Engineer junior spécialisé en pipelines de données, Snowflake, dbt et transformation digitale." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://oussama-layaidi.vercel.app/" />
+  <meta property="og:locale"      content="fr_FR" />
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- ─── TWITTER CARDS ─── -->
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="Oussama Layaidi — Data Engineer" />
+  <meta name="twitter:description" content="Portfolio de Oussama Layaidi, Data Engineer junior spécialisé en pipelines de données, Snowflake, dbt et transformation digitale." />
+
+  <!-- ─── ROBOTS ─── -->
+  <meta name="robots" content="index, follow" />
+
+  <!-- ─── FAVICON (placeholder — à activer avec une icône réelle) ─── -->
+  <!-- <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" /> -->
+
+  <!-- ─── CSS ─── -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SKIP TO CONTENT — accessibilité clavier
+       Invisible jusqu'à ce qu'il reçoive le focus via Tab
+       ═══════════════════════════════════════════════════════════ -->
+  <a href="#main-content" class="skip-link" data-i18n="skip.link">
+    Aller au contenu principal
+  </a>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HEADER — Navigation + switch de langue
+       ═══════════════════════════════════════════════════════════ -->
+  <header class="nav" role="banner">
+    <nav class="nav__inner" aria-label="Navigation principale">
+
+      <!-- Logo / Initiales -->
+      <a href="#hero" class="nav__logo" aria-label="Retour au haut de la page">
+        <span class="nav__logo-text">OL</span>
+      </a>
+
+      <!-- Liens de section -->
+      <ul class="nav__links" role="list">
+        <li><a href="#about"    class="nav__link" data-i18n="nav.about">À propos</a></li>
+        <li><a href="#skills"   class="nav__link" data-i18n="nav.skills">Compétences</a></li>
+        <li><a href="#projects" class="nav__link" data-i18n="nav.projects">Projets</a></li>
+        <li><a href="#contact"  class="nav__link" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+
+      <!-- Switch FR | EN -->
+      <div class="nav__lang-switch" role="group" aria-label="Sélection de la langue">
+        <button class="nav__lang-btn nav__lang-btn--active"
+                data-lang="fr"
+                aria-pressed="true"
+                aria-label="Français">FR</button>
+        <span class="nav__lang-separator" aria-hidden="true">|</span>
+        <button class="nav__lang-btn"
+                data-lang="en"
+                aria-pressed="false"
+                aria-label="English">EN</button>
+      </div>
+
+      <!-- Hamburger — visible en mobile uniquement (contrôlé en CSS) -->
+      <button class="nav__hamburger"
+              aria-expanded="false"
+              aria-controls="nav-mobile-menu"
+              aria-label="Ouvrir le menu de navigation">
+        <span class="nav__hamburger-line"></span>
+        <span class="nav__hamburger-line"></span>
+        <span class="nav__hamburger-line"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MAIN — Point d'ancrage du skip-link
+       ═══════════════════════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ───────────────────────────────────────────────────────
+         HERO
+         ─────────────────────────────────────────────────────── -->
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <div class="hero__content">
+
+        <!-- h1 unique de la page -->
+        <h1 class="hero__title" id="hero-title">
+          <span class="hero__greeting" data-i18n="hero.greeting">Bonjour, je suis</span>
+          <span class="hero__name">Oussama Layaidi</span>
+        </h1>
+
+        <!-- Rôle professionnel -->
+        <p class="hero__role" data-i18n="hero.role">Data Engineer &amp; Analyst</p>
+
+        <!-- Accroche courte -->
+        <p class="hero__tagline" data-i18n="hero.tagline">
+          Je construis des pipelines fiables, des données propres, et des insights qui comptent.
+        </p>
+
+        <!-- CTA vers profils sociaux -->
+        <div class="hero__actions">
+          <a href="https://github.com/OussamaLay"
+             class="hero__btn hero__btn--github"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Voir le profil GitHub de Oussama Layaidi">
+            GitHub
+          </a>
+          <a href="https://linkedin.com/in/oussama-layaidi"
+             class="hero__btn hero__btn--linkedin"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Voir le profil LinkedIn de Oussama Layaidi">
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────
+         ABOUT
+         ─────────────────────────────────────────────────────── -->
+    <section id="about" class="about" aria-labelledby="about-title">
+      <div class="about__inner">
+        <h2 class="about__title" id="about-title" data-i18n="about.title">À propos de moi</h2>
+
+        <p class="about__text" data-i18n="about.description">
+          Diplômé ingénieur en systèmes d'information, je me spécialise en Data Engineering
+          avec un focus sur la qualité des données, l'industrialisation des pipelines ELT
+          et les environnements Cloud (Snowflake, Azure, Databricks).
+          J'ai contribué à des projets concrets en stage : la Data Foundation MES chez Sanofi
+          (via Atos) et un pipeline de maintenance pour les JO Paris 2024 (Spie Batignolles).
+        </p>
+
+        <!-- Tags / mots-clés -->
+        <div class="about__tags" role="list">
+          <span class="about__tag" role="listitem" data-i18n="about.tag.pipelines">Pipelines ELT</span>
+          <span class="about__tag" role="listitem" data-i18n="about.tag.quality">Data Quality</span>
+          <span class="about__tag" role="listitem" data-i18n="about.tag.cloud">Cloud &amp; Scale</span>
+          <span class="about__tag" role="listitem" data-i18n="about.tag.agile">Agile / Scrum</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────
+         SKILLS
+         Badges groupés par catégorie.
+         Les noms de technologies (Python, SQL…) ne sont pas traduits :
+         ce sont des termes techniques universels.
+         ─────────────────────────────────────────────────────── -->
+    <section id="skills" class="skills" aria-labelledby="skills-title">
+      <div class="skills__inner">
+        <h2 class="skills__title" id="skills-title" data-i18n="skills.title">Compétences</h2>
+
+        <!-- Langages de programmation -->
+        <div class="skills__group">
+          <h3 class="skills__group-title" data-i18n="skills.group.languages">Langages</h3>
+          <div class="skills__badges" role="list">
+            <span class="skill-badge" role="listitem">Python</span>
+            <span class="skill-badge" role="listitem">SQL</span>
+            <span class="skill-badge" role="listitem">Scala</span>
+            <span class="skill-badge" role="listitem">Java</span>
+            <span class="skill-badge" role="listitem">C++</span>
+          </div>
+        </div>
+
+        <!-- Data Engineering & Big Data -->
+        <div class="skills__group">
+          <h3 class="skills__group-title" data-i18n="skills.group.dataeng">Data Engineering</h3>
+          <div class="skills__badges" role="list">
+            <span class="skill-badge" role="listitem">Snowflake</span>
+            <span class="skill-badge" role="listitem">dbt</span>
+            <span class="skill-badge" role="listitem">Apache Airflow</span>
+            <span class="skill-badge" role="listitem">PySpark</span>
+            <span class="skill-badge" role="listitem">Delta Lake</span>
+            <span class="skill-badge" role="listitem">Databricks</span>
+            <span class="skill-badge" role="listitem">Kafka</span>
+            <span class="skill-badge" role="listitem">Informatica IICS</span>
+          </div>
+        </div>
+
+        <!-- Cloud & Bases de données -->
+        <div class="skills__group">
+          <h3 class="skills__group-title" data-i18n="skills.group.cloud">Cloud &amp; Databases</h3>
+          <div class="skills__badges" role="list">
+            <span class="skill-badge" role="listitem">Microsoft Azure</span>
+            <span class="skill-badge" role="listitem">Azure Data Factory</span>
+            <span class="skill-badge" role="listitem">Docker</span>
+            <span class="skill-badge" role="listitem">PostgreSQL</span>
+            <span class="skill-badge" role="listitem">MongoDB</span>
+          </div>
+        </div>
+
+        <!-- Visualisation de données -->
+        <div class="skills__group">
+          <h3 class="skills__group-title" data-i18n="skills.group.viz">Visualisation</h3>
+          <div class="skills__badges" role="list">
+            <span class="skill-badge" role="listitem">Power BI</span>
+            <span class="skill-badge" role="listitem">Streamlit</span>
+            <span class="skill-badge" role="listitem">Tableau</span>
+            <span class="skill-badge" role="listitem">Qlik</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────
+         PROJECTS
+         Les cartes sont générées en JS par renderProjects(lang).
+         Cette section ne contient que le conteneur + les filtres.
+         Le contenu sera dynamique à partir de l'étape 8.
+         ─────────────────────────────────────────────────────── -->
+    <section id="projects" class="projects" aria-labelledby="projects-title">
+      <div class="projects__inner">
+        <h2 class="projects__title" id="projects-title" data-i18n="projects.title">Projets</h2>
+
+        <!-- Filtres par techno -->
+        <div class="projects__filters" role="group" aria-label="Filtres de projets">
+          <button class="projects__filter projects__filter--active"
+                  data-filter="all"
+                  data-i18n="projects.filter.all">Tous</button>
+          <!-- Les filtres par techno seront générés dynamiquement en JS (étape 8) -->
+        </div>
+
+        <!-- Conteneur des cartes — rempli par renderProjects(lang) -->
+        <div class="projects__grid" id="projects-container" role="list">
+          <!-- Cartes injectées en JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────────────────────────
+         CONTACT
+         Liens directs : email (mailto), LinkedIn, GitHub.
+         Pas de formulaire → pas de risque XSS sur les inputs.
+         ─────────────────────────────────────────────────────── -->
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <div class="contact__inner">
+        <h2 class="contact__title" id="contact-title" data-i18n="contact.title">Contact</h2>
+
+        <p class="contact__text" data-i18n="contact.description">
+          N'hésitez pas à me contacter pour une opportunité ou une collaboration.
+        </p>
+
+        <div class="contact__links">
+          <!-- Email -->
+          <a href="mailto:oussama.layaidi@gmail.com"
+             class="contact__link contact__link--email"
+             aria-label="Envoyer un email à Oussama Layaidi">
+            <span class="contact__link-label" data-i18n="contact.label.email">Email</span>
+            <span class="contact__link-value">oussama.layaidi@gmail.com</span>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com/in/oussama-layaidi"
+             class="contact__link"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Profil LinkedIn de Oussama">
+            <span class="contact__link-label">LinkedIn</span>
+            <span class="contact__link-value">oussama-layaidi</span>
+          </a>
+
+          <!-- GitHub -->
+          <a href="https://github.com/OussamaLay"
+             class="contact__link"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Profil GitHub de Oussama">
+            <span class="contact__link-label">GitHub</span>
+            <span class="contact__link-value">OussamaLay</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /#main-content -->
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <p class="footer__copy">
+      <span data-i18n="footer.copy">&copy; 2026 Oussama Layaidi</span>
+      <span class="footer__separator" aria-hidden="true"> — </span>
+      <span data-i18n="footer.built">Construit avec HTML, CSS &amp; JS vanille</span>
+    </p>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCRIPTS — defer : ne bloquent pas le rendu HTML
+       Ordre critique : translations → i18n → animations → main
+       main.js est le point d'entrée qui orchestre les autres.
+       ═══════════════════════════════════════════════════════════ -->
+  <script src="js/translations.js" defer></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/main.js" defer></script>
+
+</body>
+</html>
