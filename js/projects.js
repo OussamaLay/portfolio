@@ -218,6 +218,7 @@
   // ─────────────────────────────────────────────────────────
   window.projects = {
     render: function(lang) {
+      currentFilter = 'all'; // Réinitialise le filtre
       renderProjects(lang);
       renderFilters(lang);
     },
