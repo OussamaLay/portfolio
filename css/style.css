@@ -961,12 +961,292 @@ header, main, footer {
 }
 
 
+/* ============================================================
+   CERTIFICATIONS — Styles pour la section certifications
+   ============================================================
+   À ajouter dans style.css après la section Projects
+   ============================================================ */
+
+/* ─────────────────────────────────────────────────────────
+   CERTIFICATIONS SECTION
+   ───────────────────────────────────────────────────────── */
+.certifications {
+  padding-block: var(--space-3xl);
+  background: var(--color-bg-secondary);
+}
+
+.certifications__inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-xl);
+}
+
+.certifications__title {
+  margin-bottom: var(--space-xl);
+  position: relative;
+  display: inline-block;
+}
+
+.certifications__title::after {
+  content: '';
+  position: absolute;
+  bottom: -var(--space-sm);
+  left: 0;
+  width: 48px;
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+/* Grille des cartes */
+.certifications__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: var(--space-xl);
+}
+
+/* Message vide */
+.certifications__empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding: var(--space-xl);
+  grid-column: 1 / -1;
+}
+
+
+/* ─────────────────────────────────────────────────────────
+   CERTIFICATION CARD
+   ───────────────────────────────────────────────────────── */
+.certification-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  transition:
+    border-color var(--transition-med),
+    transform var(--transition-med),
+    box-shadow var(--transition-med);
+}
+
+.certification-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px var(--color-accent-glow);
+}
+
+/* Header avec logo + nom */
+.certification-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.certification-card__logo {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  padding: var(--space-xs);
+  transition: transform var(--transition-fast);
+}
+
+.certification-card:hover .certification-card__logo {
+  transform: scale(1.05);
+}
+
+/* Fallback pour logo manquant */
+.certification-card__logo--fallback {
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+.certification-card__header-info {
+  flex: 1;
+  min-width: 0; /* Pour permettre l'ellipsis */
+}
+
+.certification-card__name {
+  font-size: var(--size-md);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.certification-card__organization {
+  font-size: var(--size-sm);
+  font-weight: 500;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+}
+
+/* Meta info (date + expiration) */
+.certification-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(56, 189, 248, 0.05);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+.certification-card__date,
+.certification-card__expiration {
+  font-size: var(--size-xs);
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  letter-spacing: 0.3px;
+}
+
+/* Section "Ce que j'ai appris" */
+.certification-card__learned {
+  margin-top: var(--space-sm);
+}
+
+.certification-card__learned-title {
+  font-size: var(--size-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: var(--font-mono);
+}
+
+.certification-card__learned-text {
+  font-size: var(--size-sm);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+/* Tags de compétences */
+.certification-card__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+.certification-card__skill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  background: var(--color-bg-primary);
+  padding: 3px var(--space-sm);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  letter-spacing: 0.3px;
+  transition: 
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.certification-card__skill:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Lien vers la certification */
+.certification-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-accent-dim);
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  font-size: var(--size-sm);
+  font-weight: 600;
+  text-decoration: none;
+  align-self: flex-start;
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.certification-card__link:hover {
+  background: var(--color-accent);
+  color: var(--color-bg-primary);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px var(--color-accent-glow);
+}
+
+
+/* ─────────────────────────────────────────────────────────
+   RESPONSIVE
+   ───────────────────────────────────────────────────────── */
+
+/* Tablet — max 900px */
+@media (max-width: 900px) {
+  .certifications__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .certification-card__logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .certification-card__name {
+    font-size: var(--size-base);
+  }
+}
+
+/* Mobile — max 600px */
+@media (max-width: 600px) {
+  .certifications__inner {
+    padding-inline: var(--space-md);
+  }
+
+  .certification-card {
+    padding: var(--space-md);
+  }
+
+  .certification-card__header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .certification-card__logo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .certification-card__meta {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .certification-card__skills {
+    justify-content: center;
+  }
+
+  .certification-card__link {
+    align-self: stretch;
+    justify-content: center;
+  }
+}
+
+
 /* ─────────────────────────────────────────────────────────────
    14. CONTACT
    ───────────────────────────────────────────────────────────── */
 .contact {
   padding-block: var(--space-3xl);
-  background: var(--color-bg-secondary);
+  /* background: var(--color-bg-secondary); */
 }
 
 .contact__inner {

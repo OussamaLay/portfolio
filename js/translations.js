@@ -10,6 +10,8 @@
    Chaque clé correspond à un [data-i18n="clé"] dans le HTML.
    Les noms de technologies (Python, SQL, Snowflake…) ne sont 
    pas traduits — ce sont des termes universels.
+   
+   NOUVEAU: Section certifications ajoutée
    ============================================================ */
 
 window.i18nData = {
@@ -37,6 +39,7 @@ window.i18nData = {
       experience: "Expérience",
       skills: "Compétences",
       projects: "Projets",
+      certifications: "Certifications",
       contact: "Contact"
     },
 
@@ -63,7 +66,7 @@ window.i18nData = {
     education: {
       title: "Parcours académique",
       items: [
-        {
+        { //isima
           id: "isima",
           dates: "Sept 2022 - Sept 2025",
           school: "Clermont Auvergne INP ISIMA",
@@ -71,7 +74,7 @@ window.i18nData = {
           location: "Clermont-Ferrand, France",
           description: "Formation d'ingénieur spécialisée en data engineering, big data, et aide à la décision."
         },
-        {
+        { //oth
           id: "oth",
           dates: "Juin 2023 - Juil 2023",
           school: "Ostbayerische Technische Hochschule (OTH)",
@@ -79,13 +82,21 @@ window.i18nData = {
           location: "Regensburg, Allemagne",
           description: "Programme d'échange international axé sur l'informatique et les mathématiques appliquées."
         },
-        {
+        { //prepa
           id: "prepa",
           dates: "Sept 2020 - Juin 2022",
           school: "Lycée Moulay Youssef",
           degree: "Classes Préparatoires aux Grandes Écoles - PSI",
           location: "Rabat, Maroc",
           description: "Physique et Sciences de l'Ingénieur (PSI), préparation aux concours des écoles d'ingénieurs."
+        },
+        { //bac
+          id: "bac",
+          dates: "Sept 2019 - Juin 2020",
+          school: "Lycée Moulay Youssef",
+          degree: "Baccalauréat Scientifique - Sciences Mathématiques",
+          location: "Rabat, Maroc",
+          description: "Obtention du baccalauréat avec mention Bien, option Sciences Mathématiques A."
         }
       ]
     },
@@ -164,6 +175,46 @@ window.i18nData = {
       ]
     },
 
+    // Certifications
+    certifications: {
+      title: "Certifications",
+      whatILearnedLabel: "Ce que j'ai appris",
+      credentialLabel: "Voir la certification",
+      items: [
+        {
+          id: "snowflake-essentials",
+          name: "Hands-On Essentials: Collaboration, Marketplace & Cost Estimation Workshop",
+          organization: "Snowflake",
+          logoPath: "assets/images/certifications/snowflake.svg",
+          date: "Avril 2025",
+          expirationStatus: "N'expire pas",
+          credentialUrl: "https://achieve.snowflake.com/d594df93-b229-4b46-aefe-046658ff3985",
+          whatILearned: "Technologies de collaboration révolutionnaires de Snowflake. Création de listings et partage de données via le Data Marketplace. Optimisation et contrôle des coûts, élimination des extractions nocturnes lourdes. Maîtrise SQL avancée (DISTINCT, GROUP BY, ORDER BY, JOINS, BEGIN/END, DECLARE, FOR).",
+          skills: [
+            "Snowflake",
+            "SQL Basics",
+            "SQL Intermediate",
+            "SQL Block Scripting",
+            "Snowflake COPY INTO",
+            "Cost Categories",
+            "Snowflake on Azure",
+            "Snowflake on GCP",
+            "Data Marketplace",
+            "SQL UPDATE",
+            "SQL Cursor",
+            "Secure UDTFs",
+            "Secure Views",
+            "Data Listing",
+            "Provider Studio",
+            "Column Name Matching",
+            "ORGADMIN Role",
+            "Account Creation"
+          ],
+          showIn: ["fr", "en"]
+        }
+      ]
+    },
+
     // Contact
     contact: {
       title: "Contact",
@@ -204,6 +255,7 @@ window.i18nData = {
       experience: "Experience",
       skills: "Skills",
       projects: "Projects",
+      certifications: "Certifications",
       contact: "Contact"
     },
 
@@ -230,7 +282,7 @@ window.i18nData = {
     education: {
       title: "Education",
       items: [
-        {
+        { //isima
           id: "isima",
           dates: "Sept 2022 - Sept 2025",
           school: "Clermont Auvergne INP ISIMA",
@@ -238,7 +290,7 @@ window.i18nData = {
           location: "Clermont-Ferrand, France",
           description: "Engineering program specialized in data engineering, big data, and decision support systems."
         },
-        {
+        { //oth
           id: "oth",
           dates: "June 2023 - July 2023",
           school: "Ostbayerische Technische Hochschule (OTH)",
@@ -246,13 +298,21 @@ window.i18nData = {
           location: "Regensburg, Germany",
           description: "International exchange program focused on computer science and applied mathematics."
         },
-        {
+        { //prepa
           id: "prepa",
           dates: "Sept 2020 - June 2022",
           school: "Lycée Moulay Youssef",
           degree: "Preparatory Classes for Engineering Schools - PSI",
           location: "Rabat, Morocco",
           description: "Physics and Engineering Sciences (PSI), preparation for competitive engineering school entrance exams."
+        },
+        { //bac
+          id: "bac",
+          dates: "Sept 2019 - June 2020",
+          school: "Moulay Youssef High School",
+          degree: "Scientific Baccalaureate – Mathematics & Sciences Track",
+          location: "Rabat, Morocco",
+          description: "Earned the baccalaureate with honors (Good), Mathematics & Sciences A option."
         }
       ]
     },
@@ -326,6 +386,46 @@ window.i18nData = {
           description: "End-to-end cloud platform for F1 data analysis: Azure Data Factory ingestion, Databricks (PySpark) transformations, Delta Lake storage, Power BI visualization. Modern Data Lakehouse architecture.",
           tags: ["Azure", "Databricks", "Delta Lake", "PySpark", "Power BI"],
           featured: true,
+          showIn: ["fr", "en"]
+        }
+      ]
+    },
+
+    // Certifications
+    certifications: {
+      title: "Certifications",
+      whatILearnedLabel: "What I learned",
+      credentialLabel: "View credential",
+      items: [
+        {
+          id: "snowflake-essentials",
+          name: "Hands-On Essentials: Collaboration, Marketplace & Cost Estimation Workshop",
+          organization: "Snowflake",
+          logoPath: "assets/images/certifications/snowflake.svg",
+          date: "April 2025",
+          expirationStatus: "Does not expire",
+          credentialUrl: "https://achieve.snowflake.com/d594df93-b229-4b46-aefe-046658ff3985",
+          whatILearned: "Snowflake's revolutionary collaboration technologies. Creating listings and sharing data through the Data Marketplace. Cost optimization and control, eliminating heavy nightly extracts. Advanced SQL mastery (DISTINCT, GROUP BY, ORDER BY, JOINS, BEGIN/END, DECLARE, FOR).",
+          skills: [
+            "Snowflake",
+            "SQL Basics",
+            "SQL Intermediate",
+            "SQL Block Scripting",
+            "Snowflake COPY INTO",
+            "Cost Categories",
+            "Snowflake on Azure",
+            "Snowflake on GCP",
+            "Data Marketplace",
+            "SQL UPDATE",
+            "SQL Cursor",
+            "Secure UDTFs",
+            "Secure Views",
+            "Data Listing",
+            "Provider Studio",
+            "Column Name Matching",
+            "ORGADMIN Role",
+            "Account Creation"
+          ],
           showIn: ["fr", "en"]
         }
       ]

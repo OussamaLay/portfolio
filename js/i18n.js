@@ -236,7 +236,12 @@
       window.projects.render(lang);
     }
 
-    // 9. Log pour debug (à retirer en prod)
+    // 9. Mise à jour des certifications (si le module existe)
+    if (window.certifications && typeof window.certifications.render === 'function') {
+      window.certifications.render(lang);
+    }
+
+    // 10. Log pour debug (à retirer en prod)
     console.log(`[i18n] Langue changée : ${lang}`);
   }
 

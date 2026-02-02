@@ -6,7 +6,7 @@
    - Détection et respect de prefers-reduced-motion
    - Animations fluides sur les sections, cartes, badges
    
-   FIX v2: Correction complète - gère les cartes PRÉSENTES + FUTURES
+   FIX: Gère les cartes PRÉSENTES au chargement + FUTURES (langue/filtre)
    ============================================================ */
 
 (function() {
@@ -20,7 +20,6 @@
 
   // Si l'utilisateur préfère réduire les animations, on arrête ici
   if (prefersReducedMotion) {
-    console.log('[animations.js] prefers-reduced-motion détecté — animations désactivées');
     return;
   }
 
@@ -41,18 +40,14 @@
 
     const observerOptions = {
       root: null,
-      rootMargin: '0px 0px -100px 0px', // Trigger un peu avant que l'élément soit visible
-      threshold: 0.15 // 15% de l'élément visible
+      rootMargin: '0px 0px -100px 0px',
+      threshold: 0.15
     };
 
     scrollObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Ajoute la classe visible
           entry.target.classList.add('reveal--visible');
-          
-          // Optionnel : ne plus observer après la première apparition
-          // scrollObserver.unobserve(entry.target);
         }
       });
     }, observerOptions);
@@ -60,8 +55,6 @@
     // Observe tous les éléments avec la classe 'reveal'
     const elementsToReveal = document.querySelectorAll('.reveal');
     elementsToReveal.forEach(el => scrollObserver.observe(el));
-
-    console.log(`[animations.js] ScrollObserver créé pour ${elementsToReveal.length} éléments`);
 
     return scrollObserver;
   }
@@ -77,43 +70,33 @@
       section.classList.add('reveal');
     });
 
-    // Cards de projets (après leur génération dynamique)
-    // On observe le conteneur et on ajoute les classes aux cartes une fois générées
+    // Cards de projets
     const projectsContainer = document.getElementById('projects-container');
     if (projectsContainer) {
       // Fonction pour ajouter les classes reveal aux cartes
       const setupProjectCards = () => {
         const cards = projectsContainer.querySelectorAll('.project-card');
-        console.log(`[animations.js] Setup de ${cards.length} cartes de projets`);
-        
         cards.forEach((card, index) => {
           if (!card.classList.contains('reveal')) {
             card.classList.add('reveal');
-            // Décalage de l'animation pour un effet en cascade
             card.style.transitionDelay = `${index * 0.1}s`;
-            console.log(`[animations.js] Carte "${card.dataset.projectId}" → classe .reveal ajoutée`);
           }
         });
       };
 
-      // 1. IMPORTANT: Ajouter les classes aux cartes DÉJÀ PRÉSENTES (au chargement initial)
+      // 1. Gérer les cartes PRÉSENTES au chargement
       setupProjectCards();
 
       // 2. Observer les FUTURS changements (langue/filtre)
-      // Déconnecte l'ancien observer s'il existe
       if (projectsMutationObserver) {
         projectsMutationObserver.disconnect();
       }
 
       projectsMutationObserver = new MutationObserver(() => {
-        console.log('[animations.js] MutationObserver: changement détecté dans projects-container');
         setupProjectCards();
-        // IMPORTANT : Re-créer le scroll observer pour observer les nouvelles cartes
         createScrollObserver();
       });
       projectsMutationObserver.observe(projectsContainer, { childList: true });
-      
-      console.log('[animations.js] MutationObserver créé pour projects-container');
     }
 
     // Timeline items
@@ -123,7 +106,7 @@
       item.style.transitionDelay = `${index * 0.1}s`;
     });
 
-    // Skills badges (effet en cascade)
+    // Skills badges
     const skillsBadges = document.querySelectorAll('.skill-badge');
     skillsBadges.forEach((badge, index) => {
       badge.style.transitionDelay = `${Math.floor(index / 8) * 0.05}s`;
@@ -138,7 +121,6 @@
     const hero = document.querySelector('.hero');
     if (!hero) return;
 
-    // Petite attente pour que le contenu soit chargé
     setTimeout(() => {
       const greeting = hero.querySelector('.hero__greeting');
       const name = hero.querySelector('.hero__name');
@@ -146,7 +128,6 @@
       const tagline = hero.querySelector('.hero__tagline');
       const actions = hero.querySelector('.hero__actions');
 
-      // Animation en cascade
       if (greeting) {
         greeting.style.opacity = '0';
         greeting.style.transform = 'translateY(20px)';
@@ -204,21 +185,11 @@
   // INITIALISATION
   // ─────────────────────────────────────────────────────────
   function init() {
-    console.log('[animations.js] Initialisation...');
-    
-    // Configure les éléments à révéler
     setupRevealElements();
-
-    // Crée l'observer pour les reveals au scroll
     createScrollObserver();
-
-    // Anime le hero au chargement
     animateHero();
-
-    console.log('[animations.js] ✅ Initialisé — animations activées');
   }
 
-  // Attend que le DOM soit prêt
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

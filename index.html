@@ -43,6 +43,7 @@
         <li><a href="#experience" class="nav__link" data-i18n="nav.experience">Experience</a></li>
         <li><a href="#skills" class="nav__link" data-i18n="nav.skills">Competences</a></li>
         <li><a href="#projects" class="nav__link" data-i18n="nav.projects">Projets</a></li>
+        <li><a href="#certifications" class="nav__link" data-i18n="nav.certifications">Certifications</a></li>
         <li><a href="#contact" class="nav__link" data-i18n="nav.contact">Contact</a></li>
       </ul>
 
@@ -166,6 +167,20 @@
       </div>
     </section>
 
+    <!-- ============================================================
+     CERTIFICATIONS SECTION
+     À insérer dans index.html après la section #projects
+     ============================================================ -->
+
+    <section id="certifications" class="certifications reveal" aria-labelledby="certifications-title">
+      <div class="certifications__inner">
+        <h2 class="certifications__title" id="certifications-title" data-i18n="certifications.title">Certifications</h2>
+        <div class="certifications__grid" id="certifications-container" role="list">
+          <!-- Les cartes de certifications seront générées dynamiquement par certifications.js -->
+        </div>
+      </div>
+    </section>
+
     <section id="contact" class="contact reveal" aria-labelledby="contact-title">
       <div class="contact__inner">
         <h2 class="contact__title" id="contact-title" data-i18n="contact.title">Contact</h2>
@@ -201,6 +216,7 @@
   <script src="js/i18n.js" defer></script>
   <script src="js/timeline.js" defer></script>
   <script src="js/projects.js" defer></script>
+  <script src="js/certifications.js" defer></script>
   <script src="js/animations.js" defer></script>
   <script src="js/main.js" defer></script>
 
