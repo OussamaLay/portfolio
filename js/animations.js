@@ -6,8 +6,7 @@
    - Détection et respect de prefers-reduced-motion
    - Animations fluides sur les sections, cartes, badges
    
-   FIX: Correction du MutationObserver qui empêchait les projets
-   de devenir visibles après un changement de langue/filtre
+   FIX v2: Correction complète - gère les cartes PRÉSENTES + FUTURES
    ============================================================ */
 
 (function() {
@@ -62,6 +61,8 @@
     const elementsToReveal = document.querySelectorAll('.reveal');
     elementsToReveal.forEach(el => scrollObserver.observe(el));
 
+    console.log(`[animations.js] ScrollObserver créé pour ${elementsToReveal.length} éléments`);
+
     return scrollObserver;
   }
 
@@ -80,24 +81,39 @@
     // On observe le conteneur et on ajoute les classes aux cartes une fois générées
     const projectsContainer = document.getElementById('projects-container');
     if (projectsContainer) {
+      // Fonction pour ajouter les classes reveal aux cartes
+      const setupProjectCards = () => {
+        const cards = projectsContainer.querySelectorAll('.project-card');
+        console.log(`[animations.js] Setup de ${cards.length} cartes de projets`);
+        
+        cards.forEach((card, index) => {
+          if (!card.classList.contains('reveal')) {
+            card.classList.add('reveal');
+            // Décalage de l'animation pour un effet en cascade
+            card.style.transitionDelay = `${index * 0.1}s`;
+            console.log(`[animations.js] Carte "${card.dataset.projectId}" → classe .reveal ajoutée`);
+          }
+        });
+      };
+
+      // 1. IMPORTANT: Ajouter les classes aux cartes DÉJÀ PRÉSENTES (au chargement initial)
+      setupProjectCards();
+
+      // 2. Observer les FUTURS changements (langue/filtre)
       // Déconnecte l'ancien observer s'il existe
       if (projectsMutationObserver) {
         projectsMutationObserver.disconnect();
       }
 
-      // Observer pour détecter quand les cartes sont ajoutées
       projectsMutationObserver = new MutationObserver(() => {
-        const cards = projectsContainer.querySelectorAll('.project-card');
-        cards.forEach((card, index) => {
-          card.classList.add('reveal');
-          // Décalage de l'animation pour un effet en cascade
-          card.style.transitionDelay = `${index * 0.1}s`;
-        });
-
+        console.log('[animations.js] MutationObserver: changement détecté dans projects-container');
+        setupProjectCards();
         // IMPORTANT : Re-créer le scroll observer pour observer les nouvelles cartes
         createScrollObserver();
       });
       projectsMutationObserver.observe(projectsContainer, { childList: true });
+      
+      console.log('[animations.js] MutationObserver créé pour projects-container');
     }
 
     // Timeline items
@@ -188,6 +204,8 @@
   // INITIALISATION
   // ─────────────────────────────────────────────────────────
   function init() {
+    console.log('[animations.js] Initialisation...');
+    
     // Configure les éléments à révéler
     setupRevealElements();
 
@@ -197,7 +215,7 @@
     // Anime le hero au chargement
     animateHero();
 
-    console.log('[animations.js] Initialisé — animations activées');
+    console.log('[animations.js] ✅ Initialisé — animations activées');
   }
 
   // Attend que le DOM soit prêt
@@ -206,9 +224,5 @@
   } else {
     init();
   }
-
-  // Re-setup après génération dynamique des projets - SUPPRIMÉ
-  // Cette partie causait des problèmes en créant plusieurs observers
-  // Le MutationObserver gère maintenant les nouvelles cartes automatiquement
 
 })();
