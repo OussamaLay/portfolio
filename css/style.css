@@ -395,6 +395,9 @@ header, main, footer {
   width: 36px;
   height: 36px;
   padding: var(--space-sm);
+  cursor: pointer;        /* Montre que c'est cliquable */
+  position: relative;     /* Contexte pour z-index */
+  z-index: 1000;         /* Au-dessus de tout */
 }
 
 .nav__hamburger-line {
