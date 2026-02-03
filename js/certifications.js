@@ -55,7 +55,7 @@
             src="${escapeHtml(cert.logoPath)}" 
             alt="Logo ${escapeHtml(cert.organization)}" 
             class="certification-card__logo"
-            onerror="this.src='assets/images/certifications/placeholder.svg'; this.classList.add('certification-card__logo--fallback');"
+            onerror="this.src='assets/images/placeholder.svg'; this.classList.add('certification-card__logo--fallback');"
           />
           <div class="certification-card__header-info">
             <h3 class="certification-card__name">${escapeHtml(cert.name)}</h3>
