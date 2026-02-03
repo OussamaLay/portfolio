@@ -123,6 +123,14 @@
       descriptionMeta.setAttribute('content', meta.description);
     }
 
+    // Canonical URL
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink) {
+      const currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.set('lang', lang);
+      canonicalLink.setAttribute('href', currentUrl.toString());
+    }
+
     // Open Graph
     const ogTitle = document.querySelector('meta[property="og:title"]');
     if (ogTitle && meta.title) {
@@ -137,6 +145,14 @@
     const ogLocale = document.querySelector('meta[property="og:locale"]');
     if (ogLocale) {
       ogLocale.setAttribute('content', lang === 'fr' ? 'fr_FR' : 'en_US');
+    }
+
+    // Open Graph URL
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) {
+      const currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.set('lang', lang);
+      ogUrl.setAttribute('content', currentUrl.toString());
     }
 
     // Twitter Cards
@@ -280,11 +296,9 @@
     setupLanguageSwitcher();
   }
 
-  // On attend que le DOM soit prêt
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
-    // DOM déjà chargé (cas rare avec defer, mais sécurité)
     init();
   }
 

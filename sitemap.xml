@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Page principale FR -->
+  <url>
+    <loc>https://oussamalayaidi.vercel.app/?lang=fr</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oussamalayaidi.vercel.app/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://oussamalayaidi.vercel.app/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oussamalayaidi.vercel.app/"/>
+  </url>
+  
+  <!-- Page principale EN -->
+  <url>
+    <loc>https://oussamalayaidi.vercel.app/?lang=en</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oussamalayaidi.vercel.app/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://oussamalayaidi.vercel.app/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oussamalayaidi.vercel.app/"/>
+  </url>
+  
+  <!-- Page par défaut (FR) -->
+  <url>
+    <loc>https://oussamalayaidi.vercel.app/</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://oussamalayaidi.vercel.app/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://oussamalayaidi.vercel.app/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://oussamalayaidi.vercel.app/"/>
+  </url>
+  
+</urlset>

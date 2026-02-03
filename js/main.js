@@ -175,7 +175,6 @@
     console.log('[main.js] Initialisé');
   }
 
-  // Attend que le DOM soit prêt
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

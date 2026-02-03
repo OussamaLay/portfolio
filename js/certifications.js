@@ -1,7 +1,5 @@
 /* ============================================================
    CERTIFICATIONS.JS — Génération dynamique des cartes de certifications
-   ============================================================
-   VERSION CORRIGÉE avec wrapper interne pour grid-template-rows
    ============================================================ */
 
 (function() {

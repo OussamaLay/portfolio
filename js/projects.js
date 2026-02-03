@@ -201,10 +201,9 @@
     renderFilters(lang);
     renderProjects(lang);
 
-    console.log('[projects.js] Initialisé');
+    // console.log('[projects.js] Initialisé');
   }
 
-  // Attend que le DOM soit prêt
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
