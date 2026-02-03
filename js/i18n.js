@@ -241,7 +241,12 @@
       window.certifications.render(lang);
     }
 
-    // 10. Log pour debug (à retirer en prod)
+    // 10. Mise à jour des engagements
+    if (window.engagements && typeof window.engagements.render === 'function') {
+      window.engagements.render(lang);
+    }
+
+    // 11. Log pour debug (à retirer en prod)
     console.log(`[i18n] Langue changée : ${lang}`);
   }
 

@@ -1,26 +1,14 @@
 /* ============================================================
    CERTIFICATIONS.JS — Génération dynamique des cartes de certifications
    ============================================================
-   Responsabilités :
-   - Générer les cartes de certifications selon la langue active
-   - Afficher le logo de l'organisme
-   - Gérer les images fallback
-   - Se mettre à jour automatiquement lors du changement de langue
+   VERSION CORRIGÉE avec wrapper interne pour grid-template-rows
    ============================================================ */
 
 (function() {
   'use strict';
 
-  // ─────────────────────────────────────────────────────────
-  // ÉTAT GLOBAL
-  // ─────────────────────────────────────────────────────────
-  let currentLang = 'fr';  // Langue active (mise à jour par i18n)
+  let currentLang = 'fr';
 
-
-  // ─────────────────────────────────────────────────────────
-  // RÉCUPÉRATION DES CERTIFICATIONS POUR UNE LANGUE
-  // Filtre les certifications selon showIn: ["fr","en"]
-  // ─────────────────────────────────────────────────────────
   function getCertificationsForLanguage(lang) {
     if (!window.i18nData || !window.i18nData[lang] || !window.i18nData[lang].certifications) {
       console.warn(`[certifications.js] Pas de certifications pour la langue ${lang}`);
@@ -28,28 +16,23 @@
     }
 
     const allCertifications = window.i18nData[lang].certifications.items;
-
-    // Filtre uniquement les certifications qui doivent être affichées dans cette langue
     return allCertifications.filter(cert => 
       cert.showIn && cert.showIn.includes(lang)
     );
   }
 
-
-  // ─────────────────────────────────────────────────────────
-  // GÉNÉRATION D'UNE CARTE DE CERTIFICATION (HTML)
-  // Retourne une string HTML (sécurisé — pas d'injection)
-  // ─────────────────────────────────────────────────────────
   function createCertificationCard(cert, lang) {
     const labels = window.i18nData[lang].certifications;
+    const contentId = `cert-content-${cert.id}`;
     
-    // Génération des tags de compétences
     const skillsHTML = cert.skills
       .map(skill => `<span class="certification-card__skill">${escapeHtml(skill)}</span>`)
       .join('');
 
     return `
       <article class="certification-card" role="listitem" data-cert-id="${escapeHtml(cert.id)}">
+        
+        <!-- HEADER (toujours visible) -->
         <div class="certification-card__header">
           <img 
             src="${escapeHtml(cert.logoPath)}" 
@@ -63,48 +46,104 @@
           </div>
         </div>
         
+        <!-- META (toujours visible) -->
         <div class="certification-card__meta">
           <span class="certification-card__date">📅 ${escapeHtml(cert.date)}</span>
           <span class="certification-card__expiration">⏱️ ${escapeHtml(cert.expirationStatus)}</span>
         </div>
         
-        <div class="certification-card__learned">
-          <h4 class="certification-card__learned-title">${escapeHtml(labels.whatILearnedLabel)}</h4>
-          <p class="certification-card__learned-text">${escapeHtml(cert.whatILearned)}</p>
+        <!-- CONTENU DÉPLIÉ (masqué par défaut) -->
+        <div class="certification-card__expandable" 
+             id="${contentId}"
+             aria-hidden="true">
+          
+          <!-- WRAPPER INTERNE (FIX pour grid-template-rows) -->
+          <div class="certification-card__expandable-inner">
+            
+            <div class="certification-card__learned">
+              <h4 class="certification-card__learned-title">${escapeHtml(labels.whatILearnedLabel)}</h4>
+              <p class="certification-card__learned-text">${escapeHtml(cert.whatILearned)}</p>
+            </div>
+            
+            <div class="certification-card__skills">
+              ${skillsHTML}
+            </div>
+            
+            <a 
+              href="${escapeHtml(cert.credentialUrl)}" 
+              class="certification-card__link" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              tabindex="-1"
+              aria-label="${escapeHtml(labels.credentialLabel)} - ${escapeHtml(cert.name)}"
+            >
+              ${escapeHtml(labels.credentialLabel)} →
+            </a>
+            
+          </div>
+          <!-- FIN WRAPPER INTERNE -->
+          
         </div>
         
-        <div class="certification-card__skills">
-          ${skillsHTML}
-        </div>
-        
-        <a 
-          href="${escapeHtml(cert.credentialUrl)}" 
-          class="certification-card__link" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          aria-label="${escapeHtml(labels.credentialLabel)} - ${escapeHtml(cert.name)}"
-        >
-          ${escapeHtml(labels.credentialLabel)} →
-        </a>
+        <!-- BOUTON TOGGLE -->
+        <button 
+          class="certification-card__toggle" 
+          aria-expanded="false" 
+          aria-controls="${contentId}"
+          type="button">
+          <span class="certification-card__toggle-text">${escapeHtml(labels.showMore)}</span>
+          <svg class="certification-card__toggle-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
       </article>
     `;
   }
 
-
-  // ─────────────────────────────────────────────────────────
-  // ÉCHAPPEMENT HTML (protection XSS)
-  // ─────────────────────────────────────────────────────────
   function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
   }
 
+  function setupToggleListeners(lang) {
+    const labels = window.i18nData[lang].certifications;
+    const toggleButtons = document.querySelectorAll('.certification-card__toggle');
+    
+    toggleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+        const targetId = btn.getAttribute('aria-controls');
+        const target = document.getElementById(targetId);
+        const textSpan = btn.querySelector('.certification-card__toggle-text');
+        const link = target?.querySelector('.certification-card__link');
+        
+        if (!target || !textSpan) return;
+        
+        if (isExpanded) {
+          // PLIER
+          btn.setAttribute('aria-expanded', 'false');
+          target.setAttribute('aria-hidden', 'true');
+          textSpan.textContent = labels.showMore;
+          if (link) link.setAttribute('tabindex', '-1');
+        } else {
+          // DÉPLIER
+          btn.setAttribute('aria-expanded', 'true');
+          target.setAttribute('aria-hidden', 'false');
+          textSpan.textContent = labels.showLess;
+          if (link) link.setAttribute('tabindex', '0');
+        }
+      });
+      
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          btn.click();
+        }
+      });
+    });
+  }
 
-  // ─────────────────────────────────────────────────────────
-  // RENDU DES CARTES DE CERTIFICATIONS
-  // Fonction principale appelée au chargement et au changement de langue
-  // ─────────────────────────────────────────────────────────
   function renderCertifications(lang) {
     currentLang = lang;
 
@@ -114,10 +153,8 @@
       return;
     }
 
-    // Récupère les certifications de la langue active
     const certifications = getCertificationsForLanguage(lang);
 
-    // Génère le HTML
     if (certifications.length === 0) {
       container.innerHTML = `
         <p class="certifications__empty" style="grid-column: 1 / -1; text-align: center; color: var(--color-text-muted);">
@@ -130,36 +167,24 @@
     const cardsHTML = certifications.map(cert => createCertificationCard(cert, lang)).join('');
     container.innerHTML = cardsHTML;
 
-    console.log(`[certifications.js] ${certifications.length} certification(s) affichée(s)`);
+    setupToggleListeners(lang);
+
+    console.log(`[certifications.js] ${certifications.length} certification(s) affichée(s) (mode compact FIXED)`);
   }
 
-
-  // ─────────────────────────────────────────────────────────
-  // INITIALISATION AU CHARGEMENT
-  // ─────────────────────────────────────────────────────────
   function init() {
-    // Récupère la langue active (depuis i18n.js)
     const lang = window.i18n?.currentLang() || 'fr';
     currentLang = lang;
-
-    // Génère les certifications
     renderCertifications(lang);
-
-    console.log('[certifications.js] Initialisé');
+    console.log('[certifications.js] Initialisé (FIXED avec wrapper interne)');
   }
 
-  // Attend que le DOM soit prêt
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
 
-
-  // ─────────────────────────────────────────────────────────
-  // EXPOSITION GLOBALE
-  // Permet à i18n.js d'appeler renderCertifications() au changement de langue
-  // ─────────────────────────────────────────────────────────
   window.certifications = {
     render: function(lang) {
       renderCertifications(lang);

@@ -25,6 +25,7 @@
   <meta name="robots" content="index, follow" />
   
   <link rel="stylesheet" href="css/style.css" />
+  <!-- <link rel="stylesheet" href="css/style_bkp.css" /> -->
 </head>
 
 <body>
@@ -44,6 +45,7 @@
         <li><a href="#skills" class="nav__link" data-i18n="nav.skills">Competences</a></li>
         <li><a href="#projects" class="nav__link" data-i18n="nav.projects">Projets</a></li>
         <li><a href="#certifications" class="nav__link" data-i18n="nav.certifications">Certifications</a></li>
+        <li><a href="#engagements" class="nav__link" data-i18n="nav.engagements">Engagements</a></li>
         <li><a href="#contact" class="nav__link" data-i18n="nav.contact">Contact</a></li>
       </ul>
 
@@ -70,7 +72,7 @@
           <span class="hero__name">Oussama Layaidi</span>
         </h1>
         <p class="hero__role" data-i18n="hero.role">Data Engineer &amp; Analyst</p>
-        <p class="hero__tagline" data-i18n="hero.tagline">Je construis des pipelines fiables, des donnees propres, et des insights qui comptent.</p>
+        <p class="hero__tagline" data-i18n="hero.tagline">Je transforme les données en solutions, et les idées en actions</p>
         <div class="hero__actions">
           <a href="https://github.com/OussamaLay" class="hero__btn hero__btn--github" target="_blank" rel="noopener noreferrer" aria-label="Voir le profil GitHub de Oussama Layaidi">GitHub</a>
           <a href="https://linkedin.com/in/oussama-layaidi" class="hero__btn hero__btn--linkedin" target="_blank" rel="noopener noreferrer" aria-label="Voir le profil LinkedIn de Oussama Layaidi">LinkedIn</a>
@@ -167,17 +169,18 @@
       </div>
     </section>
 
-    <!-- ============================================================
-     CERTIFICATIONS SECTION
-     À insérer dans index.html après la section #projects
-     ============================================================ -->
-
     <section id="certifications" class="certifications reveal" aria-labelledby="certifications-title">
       <div class="certifications__inner">
         <h2 class="certifications__title" id="certifications-title" data-i18n="certifications.title">Certifications</h2>
         <div class="certifications__grid" id="certifications-container" role="list">
-          <!-- Les cartes de certifications seront générées dynamiquement par certifications.js -->
         </div>
+      </div>
+    </section>
+
+    <section id="engagements" class="engagements reveal" aria-labelledby="engagements-title">
+      <div class="engagements__inner">
+        <h2 class="engagements__title" id="engagements-title" data-i18n="engagements.title">Vie associative &amp; engagements</h2>
+        <div class="engagements__list" id="engagements-container" role="list"></div>
       </div>
     </section>
 
@@ -217,6 +220,7 @@
   <script src="js/timeline.js" defer></script>
   <script src="js/projects.js" defer></script>
   <script src="js/certifications.js" defer></script>
+  <script src="js/engagements.js" defer></script>
   <script src="js/animations.js" defer></script>
   <script src="js/main.js" defer></script>
 

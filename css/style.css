@@ -329,6 +329,7 @@ header, main, footer {
   position: relative;
   padding-block: var(--space-sm);
   transition: color var(--transition-fast);
+  white-space: nowrap;
 }
 
 /* Ligne sous-titrée — apparaît au hover / section active */
@@ -444,6 +445,9 @@ header, main, footer {
 
 .hero__role {
   margin-top: var(--space-md);
+  max-width: none;
+  width: fit-content;
+  margin-inline: auto;
   font-size: var(--size-lg);
   font-weight: 500;
   color: var(--color-accent);
@@ -1010,13 +1014,13 @@ header, main, footer {
 
 
 /* ─────────────────────────────────────────────────────────
-   CERTIFICATION CARD
+   CERTIFICATION CARD — VERSION COMPACTE CORRIGÉE
    ───────────────────────────────────────────────────────── */
 .certification-card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: var(--space-xl);
+  padding: var(--space-lg);
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
@@ -1028,21 +1032,20 @@ header, main, footer {
 
 .certification-card:hover {
   border-color: var(--color-accent);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 32px var(--color-accent-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px var(--color-accent-glow);
 }
 
-/* Header avec logo + nom */
+/* Header avec logo + nom (TOUJOURS VISIBLE) */
 .certification-card__header {
   display: flex;
   align-items: flex-start;
   gap: var(--space-md);
-  margin-bottom: var(--space-sm);
 }
 
 .certification-card__logo {
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   flex-shrink: 0;
   object-fit: contain;
   border-radius: var(--radius-sm);
@@ -1055,7 +1058,6 @@ header, main, footer {
   transform: scale(1.05);
 }
 
-/* Fallback pour logo manquant */
 .certification-card__logo--fallback {
   opacity: 0.3;
   filter: grayscale(1);
@@ -1063,7 +1065,7 @@ header, main, footer {
 
 .certification-card__header-info {
   flex: 1;
-  min-width: 0; /* Pour permettre l'ellipsis */
+  min-width: 0;
 }
 
 .certification-card__name {
@@ -1082,11 +1084,11 @@ header, main, footer {
   letter-spacing: 0.5px;
 }
 
-/* Meta info (date + expiration) */
+/* Meta info (TOUJOURS VISIBLE) */
 .certification-card__meta {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   padding: var(--space-sm) var(--space-md);
   background: rgba(56, 189, 248, 0.05);
   border-radius: var(--radius-sm);
@@ -1101,15 +1103,41 @@ header, main, footer {
   letter-spacing: 0.3px;
 }
 
+
+/* ─────────────────────────────────────────────────────────
+   CONTENU DÉPLIÉ — SYSTÈME CORRIGÉ
+   ───────────────────────────────────────────────────────── */
+
+/* Container externe (grid) */
+.certification-card__expandable {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.3s ease;
+}
+
+/* État déplié */
+.certification-card__expandable[aria-hidden="false"] {
+  grid-template-rows: 1fr;
+}
+
+/* Wrapper interne (FIX CRITIQUE) */
+.certification-card__expandable-inner {
+  min-height: 0;
+  /* Cette classe est essentielle pour que grid-template-rows fonctionne */
+}
+
 /* Section "Ce que j'ai appris" */
 .certification-card__learned {
   margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
 }
 
 .certification-card__learned-title {
-  font-size: var(--size-sm);
+  font-size: var(--size-xs);
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--color-accent);
   margin-bottom: var(--space-sm);
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -1127,7 +1155,7 @@ header, main, footer {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-xs);
-  margin-top: var(--space-sm);
+  margin-top: var(--space-md);
 }
 
 .certification-card__skill {
@@ -1154,7 +1182,7 @@ header, main, footer {
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
-  margin-top: var(--space-sm);
+  margin-top: var(--space-md);
   padding: var(--space-sm) var(--space-md);
   background: var(--color-accent-dim);
   color: var(--color-accent);
@@ -1179,6 +1207,51 @@ header, main, footer {
 
 
 /* ─────────────────────────────────────────────────────────
+   BOUTON TOGGLE
+   ───────────────────────────────────────────────────────── */
+.certification-card__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  width: 100%;
+  padding: var(--space-sm);
+  margin-top: var(--space-sm);
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--size-sm);
+  font-weight: 600;
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.certification-card__toggle:hover {
+  background: var(--color-accent-dim);
+  border-color: var(--color-accent);
+}
+
+.certification-card__toggle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.certification-card__toggle-icon {
+  transition: transform var(--transition-med);
+}
+
+.certification-card__toggle[aria-expanded="true"] .certification-card__toggle-icon {
+  transform: rotate(180deg);
+}
+
+
+/* ─────────────────────────────────────────────────────────
    RESPONSIVE
    ───────────────────────────────────────────────────────── */
 
@@ -1189,8 +1262,8 @@ header, main, footer {
   }
 
   .certification-card__logo {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
   }
 
   .certification-card__name {
@@ -1215,22 +1288,251 @@ header, main, footer {
   }
 
   .certification-card__logo {
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
   }
 
   .certification-card__meta {
     flex-direction: column;
-    gap: var(--space-sm);
-  }
-
-  .certification-card__skills {
-    justify-content: center;
+    gap: var(--space-xs);
+    align-items: center;
+    text-align: center;
   }
 
   .certification-card__link {
-    align-self: stretch;
+    width: 100%;
     justify-content: center;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────
+   PREFERS-REDUCED-MOTION
+   ───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .certification-card__expandable {
+    transition: none;
+  }
+
+  .certification-card__toggle-icon {
+    transition: none;
+  }
+
+  .certification-card {
+    transition: none;
+  }
+
+  .certification-card__logo {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   15. ENGAGEMENTS — Vie associative & engagements
+   ========================================================= */
+
+.engagements {
+  padding-block: var(--space-3xl);
+  background: var(--color-bg-primary);
+}
+
+.engagements__inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-xl);
+}
+
+.engagements__title {
+  margin-bottom: var(--space-xl);
+  position: relative;
+  display: inline-block;
+}
+
+.engagements__title::after {
+  content: '';
+  position: absolute;
+  bottom: -var(--space-sm);
+  left: 0;
+  width: 48px;
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+/* Container vertical (liste) */
+.engagements__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Message vide */
+.engagements__empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding: var(--space-xl);
+}
+
+
+/* ─────────────────────────────────────────────────────────
+   ENGAGEMENT ITEM — Bloc pleine largeur
+   ───────────────────────────────────────────────────────── */
+.engagement-item {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition:
+    border-color var(--transition-med),
+    transform var(--transition-med),
+    box-shadow var(--transition-med);
+}
+
+.engagement-item:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px var(--color-accent-glow);
+}
+
+/* Focus visible (navigation clavier) */
+.engagement-item:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-color: var(--color-accent);
+}
+
+
+/* ─────────────────────────────────────────────────────────
+   HEADER — Titre + Meta (lieu • dates)
+   ───────────────────────────────────────────────────────── */
+.engagement-item__header {
+  margin-bottom: var(--space-md);
+}
+
+.engagement-item__title {
+  font-size: var(--size-lg);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.engagement-item__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  font-size: var(--size-sm);
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  letter-spacing: 0.3px;
+}
+
+.engagement-item__location {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.engagement-item__separator {
+  color: var(--color-text-muted);
+  opacity: 0.5;
+}
+
+.engagement-item__dates {
+  color: var(--color-text-secondary);
+}
+
+
+/* ─────────────────────────────────────────────────────────
+   CONTENT — Description (paragraph OU bullets)
+   ───────────────────────────────────────────────────────── */
+.engagement-item__content {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+/* Paragraphe simple */
+.engagement-item__text {
+  /* font-size: var(-size-sm); */
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Liste à puces */
+.engagement-item__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.engagement-item__bullet {
+  /* font-size: var(--size-sm); */
+  line-height: 1.7;
+  padding-left: var(--space-lg);
+  position: relative;
+}
+
+/* Puce personnalisée */
+.engagement-item__bullet::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+
+/* ─────────────────────────────────────────────────────────
+   RESPONSIVE
+   ───────────────────────────────────────────────────────── */
+
+/* Tablet — max 900px */
+@media (max-width: 900px) {
+  .engagement-item {
+    padding: var(--space-lg);
+  }
+
+  .engagement-item__title {
+    font-size: var(--size-md);
+  }
+}
+
+/* Mobile — max 600px */
+@media (max-width: 600px) {
+  .engagements__inner {
+    padding-inline: var(--space-md);
+  }
+
+  .engagement-item {
+    padding: var(--space-md);
+  }
+
+  .engagement-item__title {
+    font-size: var(--size-base);
+  }
+
+  .engagement-item__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+
+  .engagement-item__separator {
+    display: none; /* Masque le séparateur en mobile */
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────
+   PREFERS-REDUCED-MOTION
+   ───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .engagement-item {
+    transition: none;
   }
 }
 
@@ -1240,7 +1542,7 @@ header, main, footer {
    ───────────────────────────────────────────────────────────── */
 .contact {
   padding-block: var(--space-3xl);
-  /* background: var(--color-bg-secondary); */
+  background: var(--color-bg-secondary);
 }
 
 .contact__inner {

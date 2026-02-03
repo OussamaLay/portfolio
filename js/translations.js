@@ -40,6 +40,7 @@ window.i18nData = {
       skills: "Compétences",
       projects: "Projets",
       certifications: "Certifications",
+      engagements: "Engagements",
       contact: "Contact"
     },
 
@@ -47,7 +48,7 @@ window.i18nData = {
     hero: {
       greeting: "Bonjour, je suis",
       role: "Data Engineer & Analyst",
-      tagline: "Je construis des pipelines fiables, des données propres, et des insights qui comptent."
+      tagline: "Je transforme les données en solutions, et les idées en actions"
     },
 
     // About
@@ -55,7 +56,7 @@ window.i18nData = {
       title: "À propos de moi",
       description: "Diplômé ingénieur en systèmes d'information, je me spécialise en Data Engineering avec un focus sur la qualité des données, l'industrialisation des pipelines ELT et les environnements Cloud (Snowflake, Azure, Databricks).",
       tag: {
-        pipelines: "Pipelines ELT",
+        pipelines: "Pipelines ELT/ELT",
         quality: "Data Quality",
         cloud: "Cloud & Scale",
         agile: "Agile / Scrum"
@@ -194,6 +195,8 @@ window.i18nData = {
       title: "Certifications",
       whatILearnedLabel: "Ce que j'ai appris",
       credentialLabel: "Voir la certification",
+      showMore: "Afficher plus",
+      showLess: "Afficher moins",
       items: [
         { //dbt
           id: "dbt-fundamentals",
@@ -297,7 +300,7 @@ window.i18nData = {
           name: "Hands-On Essentials : Collaboration, Marketplace & Estimation des coûts",
           organization: "Snowflake",
           logoPath: "assets/images/certifications/snowflake.svg",
-          date: "Avril 2025",
+          date: "21 Avril 2025",
           expirationStatus: "N'expire pas",
           credentialUrl: "https://achieve.snowflake.com/d594df93-b229-4b46-aefe-046658ff3985",
           whatILearned: "Création de listings via Provider Studio, partage et consommation de datasets via Marketplace, et estimation/monitoring des coûts. Renforcement des bases SQL (GROUP BY, JOIN, UPDATE) et du contrôle de flux (BEGIN/END, variables, curseurs).",
@@ -378,6 +381,34 @@ window.i18nData = {
       ]
     },
 
+    // Engagements (Vie associative)
+    engagements: {
+      title: "Vie associative & engagements",
+      items: [
+        {
+          id: "bds-football",
+          title: "Membre du Bureau des Sports (BDS) & joueur – Équipe universitaire de football (ISIMA)",
+          location: "Clermont-Ferrand, France",
+          dates: "2022 – 2025",
+          type: "bullets",
+          content: [
+            "Organisation et participation aux entraînements, ainsi qu'aux compétitions universitaires inter-écoles.",
+            "Engagement collectif et esprit d'équipe dans un cadre compétitif et régulier."
+          ],
+          showIn: ["fr", "en"]
+        },
+        {
+          id: "image-secretary",
+          title: "Secrétaire général — Association Im@ge ISIMA",
+          location: "Clermont-Ferrand, France",
+          dates: "Fév. 2023 – Mars 2024",
+          type: "paragraph",
+          content: "L'association Im@ge agit comme une structure de type ESN étudiante et facilite la collaboration entre les entreprises partenaires et les étudiants ingénieurs à travers des projets rémunérés à valeur professionnelle, dans un cadre associatif à but non lucratif.",
+          showIn: ["fr", "en"]
+        }
+      ]
+    },
+
     // Contact
     contact: {
       title: "Contact",
@@ -419,6 +450,7 @@ window.i18nData = {
       skills: "Skills",
       projects: "Projects",
       certifications: "Certifications",
+      engagements: "Community",
       contact: "Contact"
     },
 
@@ -426,7 +458,7 @@ window.i18nData = {
     hero: {
       greeting: "Hi, I'm",
       role: "Data Engineer & Analyst",
-      tagline: "I build reliable pipelines, clean data, and insights that matter."
+      tagline: "I turn data into solutions, and ideas into action"
     },
 
     // About
@@ -434,7 +466,7 @@ window.i18nData = {
       title: "About me",
       description: "Graduate engineer in information systems, I specialize in Data Engineering with a focus on data quality, ELT pipeline industrialization, and Cloud environments (Snowflake, Azure, Databricks).",
       tag: {
-        pipelines: "ELT Pipelines",
+        pipelines: "ELT/ELT Pipelines",
         quality: "Data Quality",
         cloud: "Cloud & Scale",
         agile: "Agile / Scrum"
@@ -573,6 +605,8 @@ window.i18nData = {
       title: "Certifications",
       whatILearnedLabel: "What I learned",
       credentialLabel: "View credential",
+      showMore: "Show more",
+      showLess: "Show less",
       items: [
         { // dbt
           id: "dbt-fundamentals",
@@ -676,7 +710,7 @@ window.i18nData = {
           name: "Hands-On Essentials: Collaboration, Marketplace & Cost Estimation",
           organization: "Snowflake",
           logoPath: "assets/images/certifications/snowflake.svg",
-          date: "April 2025",
+          date: "April 21, 2025",
           expirationStatus: "Does not expire",
           credentialUrl: "https://achieve.snowflake.com/d594df93-b229-4b46-aefe-046658ff3985",
           whatILearned: "Created listings with Provider Studio, shared/consumed datasets through Marketplace, and monitored/estimated Snowflake costs. Strengthened SQL fundamentals (GROUP BY, JOIN, UPDATE) and control-flow concepts (BEGIN/END, variables, cursors).",
@@ -752,6 +786,34 @@ window.i18nData = {
             "JSON",
             "Parquet"
           ],
+          showIn: ["fr", "en"]
+        }
+      ]
+    },
+
+    // Engagements (Community & Extracurricular)
+    engagements: {
+      title: "Community & Extracurricular",
+      items: [
+        {
+          id: "bds-football",
+          title: "Sports Bureau (BDS) Member & Player – ISIMA University Football Team",
+          location: "Clermont-Ferrand, France",
+          dates: "2022 – 2025",
+          type: "bullets",
+          content: [
+            "Organizing and participating in training sessions and inter-school university competitions.",
+            "Collective commitment and team spirit in a competitive and regular framework."
+          ],
+          showIn: ["fr", "en"]
+        },
+        {
+          id: "image-secretary",
+          title: "Secretary General — Im@ge ISIMA Association",
+          location: "Clermont-Ferrand, France",
+          dates: "Feb. 2023 – March 2024",
+          type: "paragraph",
+          content: "The Im@ge association acts as a student-run ESN-type structure and facilitates collaboration between partner companies and engineering students through paid projects with professional value, within a non-profit associative framework.",
           showIn: ["fr", "en"]
         }
       ]
