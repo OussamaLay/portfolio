@@ -1,11 +1,5 @@
-# robots.txt pour portfolio
-
 User-agent: *
 Allow: /
 
 # Sitemap
 Sitemap: https://oussamalayaidi.vercel.app/sitemap.xml
-
-# Bloquer les fichiers inutiles (optionnel)
-Disallow: /assets/images/.gitkeep
-Disallow: /*.json$
