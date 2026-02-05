@@ -1,0 +1,10 @@
+{
+  "name": "portfolio-oussama-layaidi",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Portfolio personnel avec tracking de clics",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev"
+  }
+}
